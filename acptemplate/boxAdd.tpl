@@ -64,7 +64,7 @@
 			<dl{if $errorField == 'className'} class="wcf-formError"{/if}>
 				<dt><label for="className">{lang}wcf.acp.box.className{/lang}</label></dt>
 				<dd>
-					<input type="text" id="className" name="className" value="{$className}" required="required" class="long" />
+					{htmlOptions options=$availableBoxTypes selected=$className name=className id=className}
 					{if $errorField == 'className'}
 						<small class="wcf-innerError">
 							{if $errorType == 'empty'}
