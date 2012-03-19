@@ -1,6 +1,7 @@
 <?php
 namespace wcf\acp\form;
 use \wcf\system\language\I18nHandler;
+use \wcf\system\exception\UserInputException;
 use \wcf\util\BoxUtil;
 use \wcf\system\StringUtil;
 use \wcf\system\ClassUtil;
@@ -36,6 +37,9 @@ class BoxAddForm extends ACPForm {
 	public $title = '';
 	public $options = '';
 	public $className = '';
+	public $style = 'title';
+	
+	public $validStyles = array('title', 'border', 'none');
 	
 	/**
 	 * @see \wcf\page\IPage::readParameters()
@@ -61,6 +65,9 @@ class BoxAddForm extends ACPForm {
 		if (!empty($_POST['className']))
 			$this->className = StringUtil::trim($_POST['className']);
 		
+		if (!empty($_POST['style']))
+			$this->className = StringUtil::trim($_POST['style']);
+		
 		I18nHandler::getInstance()->readValues();
 		
 		if (I18nHandler::getInstance()->isPlainValue('title'))
@@ -80,7 +87,10 @@ class BoxAddForm extends ACPForm {
 			throw new UserInputException('name', 'notValid');
 		
 		if (!I18nHandler::getInstance()->validateValue('title'))
-			throw new \wcf\system\exception\UserInputException('title');
+			throw new UserInputException('title');
+		
+		if (!in_array($this->style, static::$validStyles))
+			throw new UserInputException('style', 'notValid');
 		
 		$this->validateClassName();
 		$this->validateOptions();
@@ -118,7 +128,8 @@ class BoxAddForm extends ACPForm {
 			'name' => $this->name,
 			'title' => $this->title,
 			'options' => $this->options,
-			'className' => $this->className
+			'className' => $this->className,
+			'style' => $this->style
 		)));
 		$this->objectAction->executeAction();
 		$returnValues = $this->objectAction->getReturnValues();
@@ -141,6 +152,7 @@ class BoxAddForm extends ACPForm {
 		
 		// reset values
 		$this->name = $this->title = $this->options = $this->className = '';
+		$this->style = 'title';
 		I18nHandler::getInstance()->disableAssignValueVariables();
 		
 		WCF::getTPL()->assign(array(
@@ -161,7 +173,8 @@ class BoxAddForm extends ACPForm {
 			'name' => $this->name,
 			'title' => $this->title,
 			'options' => $this->options,
-			'className' => $this->className
+			'className' => $this->className,
+			'style' => $this->style
 		));
 	}
 }

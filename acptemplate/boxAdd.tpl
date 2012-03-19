@@ -61,7 +61,7 @@
 				</dd>
 			</dl>
 			
-			<dl{if $errorField == 'name'} class="wcf-formError"{/if}>
+			<dl{if $errorField == 'className'} class="wcf-formError"{/if}>
 				<dt><label for="className">{lang}wcf.acp.box.className{/lang}</label></dt>
 				<dd>
 					<input type="text" id="className" name="className" value="{$className}" required="required" class="long" />
@@ -81,7 +81,7 @@
 		</fieldset>
 		
 		<fieldset>
-			<legend>{lang}wcf.acp.box.content{/lang}</legend>
+			<legend>{lang}wcf.acp.box.display{/lang}</legend>
 			
 			<dl{if $errorField == 'title'} class="wcf-formError"{/if}>
 				<dt><label for="title">{lang}wcf.acp.box.title{/lang}</label></dt>
@@ -101,6 +101,28 @@
 			
 			{include file='multipleLanguageInputJavascript' elementIdentifier='title'}
 			
+			<dl{if $errorField == 'style'} class="wcf-formError"{/if}>
+				<dt><label for="style">{lang}wcf.acp.box.style{/lang}</label></dt>
+				<dd>
+					<input type="text" id="style" name="style" value="{$style}" required="required" class="medium" />
+					{if $errorField == 'display'}
+						<small class="wcf-innerError">
+							{if $errorType == 'empty'}
+								{lang}wcf.global.form.error.empty{/lang}
+							{else}
+								{lang}wcf.acp.box.style.error.{@$errorType}{/lang}
+							{/if}
+						</small>
+					{/if}
+				</dd>
+			</dl>
+			
+			{event name='displayFields'}
+		</fieldset>
+		
+		<fieldset>
+			<legend>{lang}wcf.acp.box.options{/lang}</legend>
+			
 			<dl{if $errorField == 'options'} class="wcf-formError"{/if}>
 				<dt><label for="options">{lang}wcf.acp.box.options{/lang}</label></dt>
 				<dd>
@@ -113,7 +135,7 @@
 				</dd>
 			</dl>
 			
-			{event name='contentFields'}
+			{event name='optionsFields'}
 		</fieldset>
 		
 		{event name='fieldsets'}

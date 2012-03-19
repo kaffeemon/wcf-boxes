@@ -71,7 +71,8 @@ class BoxEditForm extends BoxAddForm {
 		$this->objectAction = new \wcf\data\box\BoxAction(array($this->boxID), 'update', array('data' => array(
 			'title' => $this->title,
 			'options' => $this->options,
-			'className' => $this->className
+			'className' => $this->className,
+			'style' => $this->style
 		)));
 		$this->objectAction->executeAction();
 		
@@ -100,6 +101,7 @@ class BoxEditForm extends BoxAddForm {
 			$this->title = $this->box->title;
 			$this->options = $this->box->options;
 			$this->className = $this->box->className;
+			$this->style = $this->box->style;
 		}
 	}
 	
