@@ -28,5 +28,24 @@ final class BoxUtil {
 		$boxType = preg_replace('/(BoxType)$/', '', $boxType);
 		return 'wcf.box.type.'.lcfirst($boxType);
 	}
+	
+	/**
+	 * returns all installed box types
+	 */
+	public static function getBoxTypes() {
+		$boxTypes = array();
+		$files = glob(DIR.'lib/system/box/type/*BoxType.class.php');
+		
+		foreach ($files as $file) {
+			$file = str_replace(DIR.'lib', 'wcf', $file);
+			$file = preg_replace('/(\.class\.php)$/', '', $file);
+			$file = str_replace('/', '\\', $file);
+			
+			if (class_exists($file) && ClassUtil::instanceOf($file, 'wcf\system\box\IBoxType'))
+				$boxTypes[] = $file;
+		}
+		
+		return $boxTypes;
+	}
 }
 
