@@ -5,7 +5,7 @@ CREATE TABLE wcf1_box (
 	title		VARCHAR(255)	NOT NULL,
 	options		TEXT			NOT NULL,
 	className	VARCHAR(255)	NOT NULL,
-	style		enum('title', 'border', 'none') NOT NULL DEFAULT 'title',
+	style		enum('title', 'border', 'blank') NOT NULL DEFAULT 'title',
 	
 	UNIQUE KEY (name)
 );

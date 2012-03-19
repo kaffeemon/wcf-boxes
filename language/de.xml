@@ -14,6 +14,9 @@
 		<item name="wcf.acp.box.display"><![CDATA[Darstellung]]></item>
 		<item name="wcf.acp.box.title"><![CDATA[Titel]]></item>
 		<item name="wcf.acp.box.style"><![CDATA[Darstellung]]></item>
+		<item name="wcf.acp.box.style.title"><![CDATA[Titel und Rahmen]]></item>
+		<item name="wcf.acp.box.style.border"><![CDATA[Rahmen]]></item>
+		<item name="wcf.acp.box.style.blank"><![CDATA[Blank]]></item>
 		<item name="wcf.acp.box.options"><![CDATA[Optionen]]></item>
 		
 		<item name="wcf.acp.box.delete.sure"><![CDATA[Möchten Sie die Box wirklich löschen?]]></item>

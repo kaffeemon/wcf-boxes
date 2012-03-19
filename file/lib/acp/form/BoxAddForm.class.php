@@ -39,7 +39,11 @@ class BoxAddForm extends ACPForm {
 	public $className = '';
 	public $style = 'title';
 	
-	public $validStyles = array('title', 'border', 'none');
+	public $availableStyles = array(
+		'title' => 'wcf.box.style.title',
+		'border' => 'wcf.box.style.border',
+		'blank' => 'wcf.box.style.blank'
+	);
 	
 	/**
 	 * @see \wcf\page\IPage::readParameters()
@@ -89,7 +93,7 @@ class BoxAddForm extends ACPForm {
 		if (!I18nHandler::getInstance()->validateValue('title'))
 			throw new UserInputException('title');
 		
-		if (!in_array($this->style, static::$validStyles))
+		if (!array_key_exists($this->style, static::$availableStyles))
 			throw new UserInputException('style', 'notValid');
 		
 		$this->validateClassName();
@@ -129,7 +133,8 @@ class BoxAddForm extends ACPForm {
 			'title' => $this->title,
 			'options' => $this->options,
 			'className' => $this->className,
-			'style' => $this->style
+			'style' => $this->style,
+			'availableStyles' => static::$availableStyles
 		)));
 		$this->objectAction->executeAction();
 		$returnValues = $this->objectAction->getReturnValues();
