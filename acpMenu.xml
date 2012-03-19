@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/acpMenu.xsd">
+	<import>
+		<acpmenuitem name="wcf.acp.menu.link.box">
+			<parent>wcf.acp.menu.link.content</parent>
+		</acpmenuitem>
+		
+		<acpmenuitem name="wcf.acp.menu.link.box.list">
+			<link>index.php/BoxList/</link>
+			<parent>wcf.acp.menu.link.box</parent>
+			<permissions>admin.content.box.canEdit,admin.content.box.canDelete</permissions>
+			<showorder>1</showorder>
+		</acpmenuitem>
+
+		<acpmenuitem name="wcf.acp.menu.link.box.add">
+			<link>index.php/BoxAdd/</link>
+			<parent>wcf.acp.menu.link.box</parent>
+			<permissions>admin.content.box.canAdd</permissions>
+			<showorder>2</showorder>
+		</acpmenuitem>
+	</import>
+</data>
+

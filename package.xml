@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="com.github.kaffeemon.wcf.boxes" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
+	<packageinformation>
+		<packagename><![CDATA[Boxes]]></packagename>
+		<isunique>1</isunique>
+		<version>1.0.0 Alpha 1</version>
+		<date>2012-03-19</date>
+	</packageinformation>
+	
+	<authorinformation>
+		<author><![CDATA[kaffeemon]]></author>
+		<authorurl><![CDATA[http://kaffeemon.github.com]]></authorurl>
+	</authorinformation>
+	
+	<requiredpackages>
+		<requiredpackage minversion="2.0.0 Alpha 1">com.woltlab.wcf</requiredpackage>
+	</requiredpackages>
+	
+	<instructions type="install">
+		<instruction type="language">language/*.xml</instruction>
+		<instruction type="file">file.tar</instruction>
+		<instruction type="template">template.tar</instruction>
+		<instruction type="acpTemplate">acptemplate.tar</instruction>
+		<instruction type="sql">install.sql</instruction>
+		<instruction type="acpMenu">acpMenu.xml</instruction>
+		<instruction type="userGroupOption">userGroupOption.xml</instruction>
+	</instructions>
+	
+	<instructions type="update" fromversion="1.0.0 Alpha *">
+		<instruction type="language">language/*.xml</instruction>
+		<instruction type="file">file.tar</instruction>
+		<instruction type="template">template.tar</instruction>
+		<instruction type="acpTemplate">acptemplate.tar</instruction>
+		<instruction type="acpMenu">acpMenu.xml</instruction>
+		<instruction type="userGroupOption">userGroupOption.xml</instruction>
+	</instructions>
+</package>
+

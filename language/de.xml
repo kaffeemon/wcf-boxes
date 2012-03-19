@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
+	<category name="wcf.acp.box">
+		<item name="wcf.acp.box.list"><![CDATA[Boxen]]></item>
+		<item name="wcf.acp.box.list.count"><![CDATA[{#$items} Boxen]]></item>
+		
+		<item name="wcf.acp.box.add"><![CDATA[Box hinzufügen]]></item>
+		<item name="wcf.acp.box.edit"><![CDATA[Box bearbeiten]]></item>
+		
+		<item name="wcf.acp.box.data"><![CDATA[Box-Daten]]></item>
+		<item name="wcf.acp.box.name"><![CDATA[Name]]></item>
+		<item name="wcf.acp.box.className"><![CDATA[Typ]]></item>
+		
+		<item name="wcf.acp.box.content"><![CDATA[Inhalt]]></item>
+		<item name="wcf.acp.box.title"><![CDATA[Titel]]></item>
+		<item name="wcf.acp.box.options"><![CDATA[Optionen]]></item>
+		
+		<item name="wcf.acp.box.delete.sure"><![CDATA[Möchten Sie die Box wirklich löschen?]]></item>
+	</category>
+	
+	<category name="wcf.acp.menu">
+		<item name="wcf.acp.menu.link.box"><![CDATA[Boxen]]></item>
+		<item name="wcf.acp.menu.link.box.list"><![CDATA[Boxen auflisten]]></item>
+		<item name="wcf.acp.menu.link.box.add"><![CDATA[Boxen hinzufügen]]></item>
+	</category>
+		
+	<category name="wcf.box">
+		
+	</category>
+	
+	<category name="wcf.box.boxes">
+		
+	</category>
+	
+	<category name="wcf.box.types">
+		<item name="wcf.box.types.static"><![CDATA[Statischer Inhalt]]></item>
+		<item name="wcf.box.types.static.content.error.empty"><![CDATA[Bitte geben Sie "content" an.]]></item>
+		<item name="wcf.box.types.usersOnline"><![CDATA[Benutzeronlineliste]]></item>
+		<item name="wcf.box.types.usersOnline.info"><![CDATA[Zur Zeit {if !$usersOnline|count || $usersOnline|count == 1}ist{else}sind{/if} {if !$usersOnline|count}{$usersOnline|count} Benutzer online:{else}keine Benutzer online{/if}]]></item>
+	</category>
+</language>
