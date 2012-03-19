@@ -104,7 +104,7 @@
 			<dl{if $errorField == 'style'} class="wcf-formError"{/if}>
 				<dt><label for="style">{lang}wcf.acp.box.style{/lang}</label></dt>
 				<dd>
-					{htmlOptions options=$validStyles selected=$style name=style id=style}
+					{htmlOptions options=$availableStyles selected=$style name=style id=style}
 					{if $errorField == 'display'}
 						<small class="wcf-innerError">
 							{if $errorType == 'empty'}
