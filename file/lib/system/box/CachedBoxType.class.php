@@ -15,11 +15,6 @@ abstract class CachedBoxType extends AbstractBoxType {
 	public $boxCache;
 	
 	/**
-	 * @see \wcf\system\box\IBoxType::getBoxTypeTitle()
-	 */
-	abstract public function getBoxTypeTitle();
-	
-	/**
 	 * lifetime of the cached data
 	 */
 	public $maxLifetime = 300;

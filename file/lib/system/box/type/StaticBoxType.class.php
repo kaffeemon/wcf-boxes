@@ -10,13 +10,6 @@ use \wcf\system\WCF;
  */
 class StaticBoxType extends \wcf\system\box\AbstractBoxType {
 	/**
-	 * @see \wcf\system\box\IBoxType::getBoxTypeTitle()
-	 */
-	public function getBoxTypeTitle() {
-		return 'wcf.box.type.static';
-	}
-	
-	/**
 	 * @see \wcf\system\box\IBoxType::validateOptions()
 	 */
 	public function validateOptions($options) {

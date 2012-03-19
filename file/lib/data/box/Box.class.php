@@ -1,5 +1,6 @@
 <?php
 namespace wcf\data\box;
+use \wcf\util\BoxUtil;
 
 /**
  * @author		kaffeemon
@@ -45,6 +46,10 @@ class Box extends \wcf\data\ProcessibleDatabaseObject {
 		}
 		
 		return $value;
+	}
+	
+	public function getBoxTypeTitle() {
+		return BoxUtil::getBoxTypeTitle($this->className);
 	}
 }
 

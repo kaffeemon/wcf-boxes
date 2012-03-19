@@ -106,7 +106,7 @@
 							<td class="columnID columnBoxID"><p>{@$box->boxID}</p></td>
 							<td class="columnText columnName"><p>{$box->name}</p></td>
 							<td class="columnText columnURL columnTitle"><p><a href="{link controller='BoxEdit' id=$box->boxID}{/link}" title="{lang}wcf.global.button.edit{/lang}">{$box->title|language}</a></p></td>
-							<td class="columnText columnClassName"><p>{$box->getProcessor()->getBoxTypeTitle()|language}</p></td>
+							<td class="columnText columnClassName"><p>{$box->getBoxTypeTitle()|language}</p></td>
 							
 							{event name='columns'}
 						</tr>

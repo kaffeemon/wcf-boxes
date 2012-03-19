@@ -22,11 +22,6 @@ abstract class AbstractBoxType extends \wcf\data\DatabaseObjectDecorator impleme
 	public $templateName = '';
 	
 	/**
-	 * @see \wcf\system\box\IBoxType::getBoxTypeTitle()
-	 */
-	abstract public function getBoxTypeTitle();
-	
-	/**
 	 * @see \wcf\system\box\IBoxType::validateOptions()
 	 */
 	public function validateOptions($options) {

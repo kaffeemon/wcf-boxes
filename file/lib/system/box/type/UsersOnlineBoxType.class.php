@@ -15,13 +15,6 @@ class UsersOnlineBoxType extends \wcf\system\box\CachedBoxType {
 	public $templateName = 'usersOnlineBoxType';
 	
 	/**
-	 * @see \wcf\system\box\IBoxType::getBoxTypeTitle()
-	 */
-	public function getBoxTypeTitle() {
-		return 'wcf.box.type.usersOnline';
-	}
-	
-	/**
 	 * @see \wcf\system\box\CachedBoxType::$maxLifetime
 	 */
 	public $maxLifetime = 60;
