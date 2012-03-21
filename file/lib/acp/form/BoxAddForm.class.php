@@ -39,7 +39,7 @@ class BoxAddForm extends ACPForm {
 	public $className = '';
 	public $style = 'title';
 	
-	public $availableStyles = array(
+	public static $availableStyles = array(
 		'title' => 'wcf.box.style.title',
 		'border' => 'wcf.box.style.border',
 		'blank' => 'wcf.box.style.blank'
@@ -133,8 +133,7 @@ class BoxAddForm extends ACPForm {
 			'title' => $this->title,
 			'options' => $this->options,
 			'className' => $this->className,
-			'style' => $this->style,
-			'availableStyles' => static::$availableStyles
+			'style' => $this->style
 		)));
 		$this->objectAction->executeAction();
 		$returnValues = $this->objectAction->getReturnValues();
@@ -173,13 +172,19 @@ class BoxAddForm extends ACPForm {
 		
 		I18nHandler::getInstance()->assignVariables();
 		
+		$boxTypes = array();
+		foreach (BoxUtil::getBoxTypes() as $boxType) {
+			$boxTypes[$boxType] = BoxUtil::getBoxTypeTitle($boxType);
+		
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'name' => $this->name,
 			'title' => $this->title,
 			'options' => $this->options,
 			'className' => $this->className,
-			'style' => $this->style
+			'style' => $this->style,
+			'availableBoxTypes' => $boxTypes,
+			'availableStyles' => static::$availableStyles
 		));
 	}
 }
