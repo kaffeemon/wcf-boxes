@@ -21,12 +21,19 @@ final class BoxUtil {
 	}
 	
 	/**
+	 * gets the name of a box type
+	 */
+	public static function getBoxTypeName($className) {
+		$boxType = array_pop(explode('\\', $className));
+		$boxType = preg_replace('/(BoxType)$/', '', $boxType);
+		return lcfirst($boxType);
+	}
+	
+	/**
 	 * gets the title of a box type
 	 */
 	public static function getBoxTypeTitle($className) {
-		$boxType = array_pop(explode('\\', $className));
-		$boxType = preg_replace('/(BoxType)$/', '', $boxType);
-		return 'wcf.box.type.'.lcfirst($boxType);
+		return 'wcf.box.type.'.self::getBoxTypeName($className);
 	}
 	
 	/**

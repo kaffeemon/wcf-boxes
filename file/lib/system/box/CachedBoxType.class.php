@@ -1,5 +1,6 @@
 <?php
 namespace wcf\system\box;
+use \wcf\util\BoxUtil;
 
 /**
  * @author		kaffeemon
@@ -33,21 +34,21 @@ abstract class CachedBoxType extends AbstractBoxType {
 	 * @see \wcf\system\box\IBoxType::render()
 	 */
 	public function render() {
-		if (empty($cacheBuilder))
+		if (empty($this->cacheBuilder))
 			throw new \wcf\system\exception\SystemException('cache builder not specified');
 		
-		$cacheName = 'box';
+		$cacheName = 'box-'.BoxUtil::getBoxTypeName(get_class($this));
 		if ($this->cacheType >= self::TYPE_BOX) $cacheName .= '-'.$this->name;
 		if ($this->cacheType >= self::TYPE_USER) $cacheName .= '-'.WCF::getUser()->userID;
 		
 		CacheHandler::getInstance()->addResource(
 			$cacheName,
 			WCF_DIR.'cache/cache.'.$cacheName.'.php',
-			$cacheBuilder,
+			$this->cacheBuilder,
 			$this->maxLifetime
 		);
 		
-		$this->boxCache = CacheHandler::get('box-'.$this->name);
+		$this->boxCache = CacheHandler::get($cacheName);
 		
 		parent::render();
 	}

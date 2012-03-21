@@ -25,8 +25,24 @@ class UsersOnlineBoxType extends \wcf\system\box\CachedBoxType {
 	public $cacheType = \wcf\system\box\CachedBoxType::TYPE_GENERAL;
 	
 	/**
-	 * @see \wcf\system\box\CachedBoxType::$cacheBuilder
+	 * @see \wcf\system\box\CachedBoxType::readData()
 	 */
-	public $cacheBuilder = 'wcf\system\cache\builder\UsersOnlineBoxTypeCacheBuilder';
+	public function readData() {
+		$this->boxCache = array(
+			'usersOnline' => array()
+		);
+		
+		$sql = "SELECT session.userID, user.userID, user.username
+				FROM wcf".WCF_N."_session session
+				LEFT JOIN wcf".WCF_N."_user user
+				ON session.userID = user.userID
+				WHERE session.userID IS NOT NULL
+				GROUP BY user.userID, session.userID, user.username
+				ORDER BY session.userID";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute();
+		while ($row = $statement->fetchArray())
+			$this->boxCache['usersOnline'][] = $row;
+	}
 }
 
