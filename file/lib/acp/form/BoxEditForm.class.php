@@ -96,7 +96,7 @@ class BoxEditForm extends BoxAddForm {
 				'title',
 				BoxUtil::getPackageID(),
 				$this->box->title,
-				'wcf.box.boxes.[a-zA-Z]+.title'
+				'wcf.box.boxes.[a-zA-Z0-9]+.title'
 			);
 			
 			$this->name = $this->box->name;

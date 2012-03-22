@@ -48,7 +48,7 @@
 			<dl{if $errorField == 'name'} class="wcf-formError"{/if}>
 				<dt><label for="name">{lang}wcf.acp.box.name{/lang}</label></dt>
 				<dd>
-					<input type="text" id="name" name="name" value="{$name}" pattern="^[a-zA-Z]+$" {if $action == 'add'}autofocus="autofocus"{else}disabled="disabled"{/if} class="medium" />
+					<input type="text" id="name" name="name" value="{$name}" pattern="^[a-zA-Z0-9]+$" {if $action == 'add'}autofocus="autofocus"{else}disabled="disabled"{/if} class="medium" />
 					{if $errorField == 'name'}
 						<small class="wcf-innerError">
 							{if $errorType == 'empty'}

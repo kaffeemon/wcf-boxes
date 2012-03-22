@@ -90,7 +90,7 @@ class BoxAddForm extends ACPForm {
 			if (empty($this->name))
 				throw new UserInputException('name');
 		
-			if (!preg_match('/^[a-zA-Z]+$/', $this->name))
+			if (!preg_match('/^[a-zA-Z0-9]+$/', $this->name))
 				throw new UserInputException('name', 'notValid');
 		}
 		
