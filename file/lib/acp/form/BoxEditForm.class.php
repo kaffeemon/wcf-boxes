@@ -116,8 +116,7 @@ class BoxEditForm extends BoxAddForm {
 		I18nHandler::getInstance()->assignVariables((bool) count($_POST));
 		
 		WCF::getTPL()->assign(array(
-			'boxID' => $this->boxID,
-			'action' => 'edit'
+			'boxID' => $this->boxID
 		));
 	}
 }

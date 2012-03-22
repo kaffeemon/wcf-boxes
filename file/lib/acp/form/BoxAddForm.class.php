@@ -184,7 +184,7 @@ class BoxAddForm extends ACPForm {
 			$style = WCF::getLanguage()->get($style);
 		
 		WCF::getTPL()->assign(array(
-			'action' => 'add',
+			'action' => $this->action,
 			'name' => $this->name,
 			'title' => $this->title,
 			'options' => $this->options,
