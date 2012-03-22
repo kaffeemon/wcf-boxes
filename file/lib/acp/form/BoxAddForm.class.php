@@ -178,7 +178,7 @@ class BoxAddForm extends ACPForm {
 		
 		$boxTypes = array();
 		foreach (BoxUtil::getBoxTypes() as $boxType)
-			$boxTypes[$boxType] = BoxUtil::getBoxTypeTitle($boxType);
+			$boxTypes[$boxType] = WCF::getLanguage()->get(BoxUtil::getBoxTypeTitle($boxType));
 		
 		foreach (static::$availableStyles as &$style)
 			$style = WCF::getLanguage()->get($style);
