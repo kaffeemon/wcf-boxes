@@ -11,6 +11,6 @@ class BoxList extends \wcf\data\DatabaseObjectList {
 	/**
 	 * @see \wcf\data\DatabaseObjectList::$className
 	 */
-	protected static $className = '\wcf\data\box\Box';
+	public $className = '\wcf\data\box\Box';
 }
 

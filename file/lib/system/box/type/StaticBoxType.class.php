@@ -12,7 +12,7 @@ class StaticBoxType extends \wcf\system\box\AbstractBoxType {
 	/**
 	 * @see \wcf\system\box\IBoxType::validateOptions()
 	 */
-	public function validateOptions($options) {
+	public static function validateOptions($options) {
 		if (empty($options['content']))
 			return 'wcf.box.type.static.content.error.empty';
 	}

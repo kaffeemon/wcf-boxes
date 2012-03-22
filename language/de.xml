@@ -36,10 +36,10 @@
 		
 	</category>
 	
-	<category name="wcf.box.types">
-		<item name="wcf.box.types.static"><![CDATA[Statischer Inhalt]]></item>
-		<item name="wcf.box.types.static.content.error.empty"><![CDATA[Bitte geben Sie "content" an.]]></item>
-		<item name="wcf.box.types.usersOnline"><![CDATA[Benutzeronlineliste]]></item>
-		<item name="wcf.box.types.usersOnline.info"><![CDATA[Zur Zeit {if !$usersOnline|count || $usersOnline|count == 1}ist{else}sind{/if} {if !$usersOnline|count}{$usersOnline|count} Benutzer online:{else}keine Benutzer online{/if}]]></item>
+	<category name="wcf.box.type">
+		<item name="wcf.box.type.static"><![CDATA[Statischer Inhalt]]></item>
+		<item name="wcf.box.type.static.content.error.empty"><![CDATA[Bitte geben Sie "content" an.]]></item>
+		<item name="wcf.box.type.usersOnline"><![CDATA[Benutzeronlineliste]]></item>
+		<item name="wcf.box.type.usersOnline.info"><![CDATA[Zur Zeit {if !$usersOnline|count || $usersOnline|count == 1}ist{else}sind{/if} {if !$usersOnline|count}{$usersOnline|count} Benutzer online:{else}keine Benutzer online{/if}]]></item>
 	</category>
 </language>

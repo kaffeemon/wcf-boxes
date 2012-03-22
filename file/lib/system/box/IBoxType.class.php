@@ -11,7 +11,7 @@ use \wcf\data\IDatabaseObjectProcessor;
  * @subpackage	system.box
  */
 interface IBoxType extends IDatabaseObjectProcessor {
-	public function validateOptions($options);
+	public static function validateOptions($options);
 	public function render();
 }
 

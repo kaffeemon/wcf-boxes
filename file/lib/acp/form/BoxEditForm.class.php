@@ -25,6 +25,8 @@ class BoxEditForm extends BoxAddForm {
 		'admin.content.box.canEdit'
 	);
 	
+	public $action = 'edit';
+	
 	public $boxID = 0;
 	public $box = null;
 	

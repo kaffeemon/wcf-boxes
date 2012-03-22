@@ -22,7 +22,9 @@ class Box extends \wcf\data\ProcessibleDatabaseObject {
 	/**
 	 * @see \wcf\data\DatabaseObject::$databaseTableIndexName
 	 */
-	protected static $databaseTableName = 'boxID';
+	protected static $databaseTableIndexName = 'boxID';
+	
+	protected $decodedOptions;
 	
 	/**
 	 * @see \wcf\data\DatabaseObject::handleData()
@@ -31,18 +33,18 @@ class Box extends \wcf\data\ProcessibleDatabaseObject {
 		parent::handleData($data);
 		
 		if (!empty($this->data['options']))
-			$this->data['options'] = json_decode($this->data['options'], true);
+			$this->decodedOptions = json_decode($this->data['options'], true);
 	}
 	
 	/**
 	 * @see \wcf\data\IStorableObject::__get()
 	 */
-	protected function __get($name) {
+	public function __get($name) {
 		$value = parent::__get($name);
 		
 		if ($value === null) {
-			if (is_array($this->data['options']) && isset($this->data['options'][$name]))
-				$value = $this->data['options'][$name];
+			if (is_array($this->decodedOptions) && isset($this->decodedOptions[$name]))
+				$value = $this->decodedOptions[$name];
 		}
 		
 		return $value;

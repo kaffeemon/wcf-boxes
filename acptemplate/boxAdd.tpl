@@ -126,7 +126,7 @@
 			<dl{if $errorField == 'options'} class="wcf-formError"{/if}>
 				<dt><label for="options">{lang}wcf.acp.box.options{/lang}</label></dt>
 				<dd>
-					<textarea id="options" name="options" cols="40" rows="10">{$value}</textarea>
+					<textarea id="options" name="options" cols="40" rows="10">{$options}</textarea>
 					{if $errorField == 'options'}
 						<small class="wcf-innerError">
 							{$errorType|language}

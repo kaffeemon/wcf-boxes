@@ -3,8 +3,8 @@ namespace wcf\acp\form;
 use \wcf\system\language\I18nHandler;
 use \wcf\system\exception\UserInputException;
 use \wcf\util\BoxUtil;
-use \wcf\system\StringUtil;
-use \wcf\system\ClassUtil;
+use \wcf\util\StringUtil;
+use \wcf\util\ClassUtil;
 use \wcf\system\WCF;
 
 /**
@@ -33,6 +33,8 @@ class BoxAddForm extends ACPForm {
 		'admin.content.box.canAdd'
 	);
 	
+	public $action = 'add';
+	
 	public $name = '';
 	public $title = '';
 	public $options = '';
@@ -40,9 +42,9 @@ class BoxAddForm extends ACPForm {
 	public $style = 'title';
 	
 	public static $availableStyles = array(
-		'title' => 'wcf.box.style.title',
-		'border' => 'wcf.box.style.border',
-		'blank' => 'wcf.box.style.blank'
+		'title' => 'wcf.acp.box.style.title',
+		'border' => 'wcf.acp.box.style.border',
+		'blank' => 'wcf.acp.box.style.blank'
 	);
 	
 	/**
@@ -70,7 +72,7 @@ class BoxAddForm extends ACPForm {
 			$this->className = StringUtil::trim($_POST['className']);
 		
 		if (!empty($_POST['style']))
-			$this->className = StringUtil::trim($_POST['style']);
+			$this->style = StringUtil::trim($_POST['style']);
 		
 		I18nHandler::getInstance()->readValues();
 		
@@ -84,11 +86,13 @@ class BoxAddForm extends ACPForm {
 	public function validate() {
 		parent::validate();
 		
-		if (empty($this->name))
-			throw new UserInputException('name');
+		if ($this->action == 'add') {
+			if (empty($this->name))
+				throw new UserInputException('name');
 		
-		if (!preg_match('^[a-zA-Z]+$', $this->name))
-			throw new UserInputException('name', 'notValid');
+			if (!preg_match('/^[a-zA-Z]+$/', $this->name))
+				throw new UserInputException('name', 'notValid');
+		}
 		
 		if (!I18nHandler::getInstance()->validateValue('title'))
 			throw new UserInputException('title');
@@ -105,10 +109,10 @@ class BoxAddForm extends ACPForm {
 			throw new UserInputException('className');
 		
 		if (!class_exists($this->className))
-			throw new UserInputException('className', 'invalid');
+			throw new UserInputException('className', 'notValid');
 		
-		if (!ClassUtil::instanceOf($this->className, 'wcf\system\box\IBoxType'))
-			throw new UserInputException('className', 'invalid');
+		if (!ClassUtil::isInstanceOf($this->className, 'wcf\system\box\IBoxType'))
+			throw new UserInputException('className', 'notValid');
 	}
 	
 	protected function validateOptions() {
@@ -173,8 +177,11 @@ class BoxAddForm extends ACPForm {
 		I18nHandler::getInstance()->assignVariables();
 		
 		$boxTypes = array();
-		foreach (BoxUtil::getBoxTypes() as $boxType) {
+		foreach (BoxUtil::getBoxTypes() as $boxType)
 			$boxTypes[$boxType] = BoxUtil::getBoxTypeTitle($boxType);
+		
+		foreach (static::$availableStyles as &$style)
+			$style = WCF::getLanguage()->get($style);
 		
 		WCF::getTPL()->assign(array(
 			'action' => 'add',

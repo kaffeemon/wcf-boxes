@@ -7,7 +7,7 @@ namespace wcf\data\box;
  * @package		com.github.kaffeemon.wcf.boxes
  * @subpackage	data.box
  */
-class BoxEditor extends \wcf\data\DatabaseObject {
+class BoxEditor extends \wcf\data\DatabaseObjectEditor {
 	/**
 	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
 	 */

@@ -24,7 +24,8 @@ final class BoxUtil {
 	 * gets the name of a box type
 	 */
 	public static function getBoxTypeName($className) {
-		$boxType = array_pop(explode('\\', $className));
+		$classParts = explode('\\', $className);
+		$boxType = array_pop($classParts);
 		$boxType = preg_replace('/(BoxType)$/', '', $boxType);
 		return lcfirst($boxType);
 	}
@@ -41,14 +42,14 @@ final class BoxUtil {
 	 */
 	public static function getBoxTypes() {
 		$boxTypes = array();
-		$files = glob(DIR.'lib/system/box/type/*BoxType.class.php');
+		$files = glob(WCF_DIR.'lib/system/box/type/*BoxType.class.php');
 		
 		foreach ($files as $file) {
-			$file = str_replace(DIR.'lib', 'wcf', $file);
+			$file = str_replace(WCF_DIR.'lib', 'wcf', $file);
 			$file = preg_replace('/(\.class\.php)$/', '', $file);
 			$file = str_replace('/', '\\', $file);
 			
-			if (class_exists($file) && ClassUtil::instanceOf($file, 'wcf\system\box\IBoxType'))
+			if (class_exists($file) && ClassUtil::isInstanceOf($file, 'wcf\system\box\IBoxType'))
 				$boxTypes[] = $file;
 		}
 		
