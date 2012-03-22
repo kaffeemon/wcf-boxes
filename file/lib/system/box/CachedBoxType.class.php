@@ -51,7 +51,7 @@ abstract class CachedBoxType extends AbstractBoxType {
 		
 		$this->boxCache = CacheHandler::getInstance()->get($cacheName);
 		
-		parent::render();
+		return parent::render();
 	}
 }
 

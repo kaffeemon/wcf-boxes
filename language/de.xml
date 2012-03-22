@@ -40,6 +40,6 @@
 		<item name="wcf.box.type.static"><![CDATA[Statischer Inhalt]]></item>
 		<item name="wcf.box.type.static.content.error.empty"><![CDATA[Bitte geben Sie "content" an.]]></item>
 		<item name="wcf.box.type.usersOnline"><![CDATA[Benutzeronlineliste]]></item>
-		<item name="wcf.box.type.usersOnline.info"><![CDATA[Zur Zeit {if !$box->boxCache.usersOnline|count || $box->boxCache.usersOnline|count == 1}ist{else}sind{/if} {if !$box->boxCache.usersOnline|count}{$box->boxCache.usersOnline|count} Benutzer online:{else}keine Benutzer online{/if}]]></item>
+		<item name="wcf.box.type.usersOnline.info"><![CDATA[Zur Zeit {if !$box->boxCache.usersOnline|count || $box->boxCache.usersOnline|count == 1}ist{else}sind{/if} {if $box->boxCache.usersOnline|count}{$box->boxCache.usersOnline|count} Benutzer online:{else}keine Benutzer online{/if}]]></item>
 	</category>
 </language>

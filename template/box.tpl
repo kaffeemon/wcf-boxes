@@ -10,10 +10,10 @@
 	
 	<div class="container-1">
 		<div class="containerContent">
-			{$box->render()}
+			{@$box->render()}
 		</div>
 	</div>
 </div>
 {else}
-{$box->render()}
+{@$box->render()}
 {/if}
