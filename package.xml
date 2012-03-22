@@ -4,8 +4,8 @@
 		<packagename><![CDATA[Boxes]]></packagename>
 		<packagedescription><![CDATA[a boxes system for the wcf2]]></packagedescription>
 		<isunique>1</isunique>
-		<version>1.0.0 Alpha 1</version>
-		<date>2012-03-19</date>
+		<version>1.0.0 Alpha 2</version>
+		<date>2012-03-22</date>
 	</packageinformation>
 	
 	<authorinformation>

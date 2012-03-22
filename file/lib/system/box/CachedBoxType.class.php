@@ -1,6 +1,7 @@
 <?php
 namespace wcf\system\box;
 use \wcf\util\BoxUtil;
+use \wcf\system\cache\CacheHandler;
 
 /**
  * @author		kaffeemon
@@ -48,7 +49,7 @@ abstract class CachedBoxType extends AbstractBoxType {
 			$this->maxLifetime
 		);
 		
-		$this->boxCache = CacheHandler::get($cacheName);
+		$this->boxCache = CacheHandler::getInstance()->get($cacheName);
 		
 		parent::render();
 	}
