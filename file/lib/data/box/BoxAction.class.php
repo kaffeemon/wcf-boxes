@@ -53,5 +53,17 @@ class BoxAction extends \wcf\data\AbstractDatabaseObjectAction {
 		
 		return $count;
 	}
+	
+	public function validateToggle() {
+		parent::validateUpdate();
+	}
+	
+	/**
+	 * Toogles status
+	 */
+	public function toggle() {
+		foreach ($this->objects as $box)
+			$box->update(array('disabled' => $box->disabled ? 0 : 1));
+	}
 }
 

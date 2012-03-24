@@ -4,6 +4,7 @@
 	//<![CDATA[
 	$(function() {
 		new WCF.Action.Delete('wcf\\data\\box\\BoxAction', $('.jsBoxRow'));
+		new WCF.Action.Toggle('wcf\\data\\box\\BoxAction', $('.jsBoxRow'));
 	});
 	//]]>
 </script>
@@ -94,9 +95,9 @@
 					{foreach from=$objects item=box}
 						<tr class="jsBoxRow">
 							<td class="columnIcon">
-								<a href="{link controller='BoxEdit' id=$box->boxID}{/link}">
-									<img src="{@$__wcf->getPath()}icon/edit1.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip" />
-								</a>
+								<img src="{@$__wcf->getPath()}icon/{if !$box->disabled}enabled{else}disabled{/if}1.svg" alt="" title="{lang}wcf.global.button.{if !$box->disabled}disable{else}enable{/if}{/lang}" class="jsToggleButton jsTooltip" data-object-id="{@$box->boxID}" data-disable-message="{lang}wcf.global.button.disable{/lang}" data-enable-message="{lang}wcf.global.button.enable{/lang}" />
+								
+								<a href="{link controller='BoxEdit' id=$box->boxID}{/link}"><img src="{@$__wcf->getPath()}icon/edit1.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip" /></a>
 								
 								<img src="{@$__wcf->getPath()}icon/delete1.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" class="jsDeleteButton jsTooltip" data-object-id="{@$box->boxID}" data-confirm-message="{lang}wcf.acp.box.delete.sure{/lang}" />
 								

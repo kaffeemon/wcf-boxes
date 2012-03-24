@@ -34,7 +34,7 @@ abstract class AbstractBoxType extends \wcf\data\DatabaseObjectDecorator impleme
 	public function render() {
 		EventHandler::getInstance()->fireAction($this, 'show');
 		
-		if (empty($this->templateName)) return '';
+		if ($this->disabled || empty($this->templateName)) return '';
 		
 		return WCF::getTPL()->fetch($this->templateName, array(
 			'box' => $this
