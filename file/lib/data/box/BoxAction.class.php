@@ -11,7 +11,7 @@ class BoxAction extends \wcf\data\AbstractDatabaseObjectAction {
 	/**
 	 * @see \wcf\data\AbstractDatabaseObjectAction::$className
 	 */
-	protected $className = '\wcf\data\box\BoxEditor';
+	protected $className = 'wcf\data\box\BoxEditor';
 	
 	/**
 	 * @see \wcf\data\AbstractDatabaseObjectAction::$permissionsCreate

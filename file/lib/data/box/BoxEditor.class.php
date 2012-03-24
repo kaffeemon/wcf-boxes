@@ -11,6 +11,6 @@ class BoxEditor extends \wcf\data\DatabaseObjectEditor {
 	/**
 	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
-	protected static $baseClass = '\wcf\data\box\Box';
+	protected static $baseClass = 'wcf\data\box\Box';
 }
 
