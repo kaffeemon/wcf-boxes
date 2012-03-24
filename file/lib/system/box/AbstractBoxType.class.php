@@ -40,5 +40,12 @@ abstract class AbstractBoxType extends \wcf\data\DatabaseObjectDecorator impleme
 			'box' => $this
 		));
 	}
+	
+	/**
+	 * @see \wcf\system\box\IBoxType::onDelete()
+	 */
+	public function onDelete() {
+	
+	}
 }
 

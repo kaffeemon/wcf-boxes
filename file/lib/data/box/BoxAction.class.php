@@ -1,5 +1,7 @@
 <?php
 namespace wcf\data\box;
+use \wcf\util\BoxUtil;
+use \wcf\system\language\I18nHandler;
 
 /**
  * @author		kaffeemon
@@ -33,5 +35,23 @@ class BoxAction extends \wcf\data\AbstractDatabaseObjectAction {
 	protected $permissionsUpdate = array(
 		'admin.content.box.canEdit'
 	);
+	
+	/**
+	 * @see \wcf\data\AbstractDatabaseObjectAction::delete()
+	 */
+	public function delete() {
+		$count = parent::delete();
+		
+		if (!empty($this->objects)) {
+			foreach ($this->objects as $object) {
+				if (preg_match('/wcf\.box\.boxes\.[a-zA-Z0-9]+\.title/', $object->title))
+					I18nHandler::getInstance()->remove($object->title, BoxUtil::getPackageID())
+				
+				$object->getProcessor()->onDelete();
+			}
+		}
+		
+		return $count;
+	}
 }
 

@@ -13,5 +13,6 @@ use \wcf\data\IDatabaseObjectProcessor;
 interface IBoxType extends IDatabaseObjectProcessor {
 	public static function validateOptions($options);
 	public function render();
+	public function onDelete();
 }
 
