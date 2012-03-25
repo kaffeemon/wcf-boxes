@@ -22,10 +22,11 @@ abstract class AbstractBoxType extends \wcf\data\DatabaseObjectDecorator impleme
 	public $templateName = '';
 	
 	/**
-	 * @see \wcf\system\box\IBoxType::validateOptions()
+	 * @see \wcf\system\box\IBoxType::getOptions()
 	 */
-	public static function validateOptions($options) {
-		EventHandler::getInstance()->fireAction('AbstractBoxType', 'validateOptions');
+	public static function getOptions() {
+		EventHandler::getInstance()->fireAction('AbstractBoxType', 'getOptions');
+		return array();
 	}
 	
 	/**

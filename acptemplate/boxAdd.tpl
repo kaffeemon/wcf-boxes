@@ -64,7 +64,11 @@
 			<dl{if $errorField == 'className'} class="wcf-formError"{/if}>
 				<dt><label for="className">{lang}wcf.acp.box.className{/lang}</label></dt>
 				<dd>
-					{htmlOptions options=$availableBoxTypes selected=$className name=className id=className}
+					{if $action == 'add'}
+						{htmlOptions options=$availableBoxTypes selected=$className name=className id=className}
+					{else}
+						<input type="text" id="className" name="className" value="{$className}" disabled="disabled" class="medium" />
+					{/if}
 					{if $errorField == 'className'}
 						<small class="wcf-innerError">
 							{if $errorType == 'empty'}
@@ -123,17 +127,7 @@
 		<fieldset>
 			<legend>{lang}wcf.acp.box.options{/lang}</legend>
 			
-			<dl{if $errorField == 'options'} class="wcf-formError"{/if}>
-				<dt><label for="options">{lang}wcf.acp.box.options{/lang}</label></dt>
-				<dd>
-					<textarea id="options" name="options" cols="40" rows="10">{$options}</textarea>
-					{if $errorField == 'options'}
-						<small class="wcf-innerError">
-							{$errorType|language}
-						</small>
-					{/if}
-				</dd>
-			</dl>
+			{include file='optionFieldList' options=$options langPrefix='wcf.box.type.{$boxType}.option.'}
 			
 			{event name='optionsFields'}
 		</fieldset>

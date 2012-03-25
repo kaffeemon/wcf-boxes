@@ -1,6 +1,7 @@
 <?php
 namespace wcf\acp\form;
 use \wcf\system\language\I18nHandler;
+use \wcf\system\option\InstantOptionHandler;
 use \wcf\system\exception\UserInputException;
 use \wcf\util\BoxUtil;
 use \wcf\util\StringUtil;
@@ -35,9 +36,10 @@ class BoxAddForm extends ACPForm {
 	
 	public $action = 'add';
 	
+	public $boxType = '';
+	
 	public $name = '';
 	public $title = '';
-	public $options = '';
 	public $className = '';
 	public $style = 'title';
 	
@@ -53,7 +55,31 @@ class BoxAddForm extends ACPForm {
 	public function readParameters() {
 		parent::readParameters();
 		
+		if ($this->action == 'add') {
+			if (!empty($_GET['boxType']))
+				$this->boxType = StringUtil::trim($_GET['boxType']);
+			
+			if (empty($this->boxType) || !in_array($this->boxType, BoxUtil::getBoxTypes())) {
+				WCF::getTPL()->assign(array(
+					'availableBoxTypes' => BoxUtil::getBoxTypes()
+				));
+				WCF::getTPL()->display('boxTypeSelect');
+				exit;
+			}
+			
+			$boxType = 'wcf\system\box\type\\'.$this->boxType;
+			InstantOptionHandler::getInstance()->registerOptions($boxType::getOptions());
+		}
+			
+		
 		I18nHandler::getInstance()->register('title');
+		
+		InstantOptionHandler::getInstance()->registerOptions(array(
+			new \wcf\data\option\Option(null, array(
+				'optionName' => 'content',
+				'optionType' => 'textarea'
+			));
+		));
 	}
 	
 	/**
@@ -65,11 +91,8 @@ class BoxAddForm extends ACPForm {
 		if (!empty($_POST['name']))
 			$this->name = StringUtil::trim($_POST['name']);
 		
-		if (!empty($_POST['options']))
-			$this->options = StringUtil::trim($_POST['options']);
-		
 		if (!empty($_POST['className']))
-			$this->className = StringUtil::trim($_POST['className']);
+			$this->className = 'wcf\system\box\type\\'.StringUtil::trim($_POST['className']);
 		
 		if (!empty($_POST['style']))
 			$this->style = StringUtil::trim($_POST['style']);
@@ -78,6 +101,8 @@ class BoxAddForm extends ACPForm {
 		
 		if (I18nHandler::getInstance()->isPlainValue('title'))
 			$this->title = I18nHandler::getInstance()->getValue('title');
+		
+		InstantOptionHandler::getInstance()->readValues();
 	}
 	
 	/**
@@ -101,7 +126,8 @@ class BoxAddForm extends ACPForm {
 			throw new UserInputException('style', 'notValid');
 		
 		$this->validateClassName();
-		$this->validateOptions();
+		
+		InstantOptionHandler::getInstance()->validate();
 	}
 	
 	protected function validateClassName() {
@@ -115,17 +141,6 @@ class BoxAddForm extends ACPForm {
 			throw new UserInputException('className', 'notValid');
 	}
 	
-	protected function validateOptions() {
-		$options = null;
-		if (!empty($this->options))
-			$options = json_decode($this->options, true);
-		
-		$className = $this->className;
-		
-		if ($errorType = $className::validateOptions($options))
-			throw new UserInputException('options', $errorType);
-	}
-	
 	/**
 	 * @see \wcf\form\IForm::save()
 	 */
@@ -135,7 +150,7 @@ class BoxAddForm extends ACPForm {
 		$this->objectAction = new \wcf\data\box\BoxAction(array(), 'create', array('data' => array(
 			'name' => $this->name,
 			'title' => $this->title,
-			'options' => $this->options,
+			'options' => json_encode(InstantOptionHandler::getInstance()->getValues()),
 			'className' => $this->className,
 			'style' => $this->style
 		)));
@@ -159,8 +174,9 @@ class BoxAddForm extends ACPForm {
 		$this->saved();
 		
 		// reset values
-		$this->name = $this->title = $this->options = $this->className = '';
+		$this->name = $this->title = $this->className = '';
 		$this->style = 'title';
+		
 		I18nHandler::getInstance()->disableAssignValueVariables();
 		
 		WCF::getTPL()->assign(array(
@@ -175,6 +191,7 @@ class BoxAddForm extends ACPForm {
 		parent::assignVariables();
 		
 		I18nHandler::getInstance()->assignVariables();
+		InstantOptionHandler::getInstance()->assignVariables();
 		
 		$boxTypes = array();
 		foreach (BoxUtil::getBoxTypes() as $boxType)
@@ -187,11 +204,11 @@ class BoxAddForm extends ACPForm {
 			'action' => $this->action,
 			'name' => $this->name,
 			'title' => $this->title,
-			'options' => $this->options,
 			'className' => $this->className,
 			'style' => $this->style,
 			'availableBoxTypes' => $boxTypes,
-			'availableStyles' => static::$availableStyles
+			'availableStyles' => static::$availableStyles,
+			'boxType' => ($this->action == 'add' ? $this->boxType : BoxUtil::getBoxTypeName($this->box->className))
 		));
 	}
 }

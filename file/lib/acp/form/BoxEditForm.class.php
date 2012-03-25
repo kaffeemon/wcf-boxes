@@ -42,7 +42,10 @@ class BoxEditForm extends BoxAddForm {
 		$this->box = new \wcf\data\box\Box($this->boxID);
 		
 		if (!$this->box->boxID)
-			throw new \wcf\system\exception\IllegalLinkException();
+			throw new \wcf\system\exception\IllegalLinkException;
+		
+		$boxType = $this->box->className;
+		InstantOptionHandler::getInstance()->registerOptions($boxType::getOptions());
 	}
 	
 	/**
@@ -72,8 +75,7 @@ class BoxEditForm extends BoxAddForm {
 		
 		$this->objectAction = new \wcf\data\box\BoxAction(array($this->boxID), 'update', array('data' => array(
 			'title' => $this->title,
-			'options' => $this->options,
-			'className' => $this->className,
+			'options' => json_encode(InstantOptionHandler::getInstance()->getValues()),
 			'style' => $this->style
 		)));
 		$this->objectAction->executeAction();
@@ -99,9 +101,10 @@ class BoxEditForm extends BoxAddForm {
 				'wcf.box.boxes.[a-zA-Z0-9]+.title'
 			);
 			
+			InstantOptionHandler::getInstance()->setValues($this->box->options);
+			
 			$this->name = $this->box->name;
 			$this->title = $this->box->title;
-			$this->options = $this->box->options;
 			$this->className = $this->box->className;
 			$this->style = $this->box->style;
 		}

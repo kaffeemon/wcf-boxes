@@ -10,11 +10,15 @@ use \wcf\system\WCF;
  */
 class StaticBoxType extends \wcf\system\box\AbstractBoxType {
 	/**
-	 * @see \wcf\system\box\IBoxType::validateOptions()
+	 * @see \wcf\system\box\IBoxType::getOptions()
 	 */
-	public static function validateOptions($options) {
-		if (empty($options['content']))
-			return 'wcf.box.type.static.content.error.empty';
+	public static function getOptions() {
+		return array(
+			new \wcf\data\option\Option(null, array(
+				'optionName' => 'content',
+				'optionType' => 'textarea'
+			));
+		);
 	}
 	
 	/**

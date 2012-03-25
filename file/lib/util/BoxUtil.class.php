@@ -33,8 +33,8 @@ final class BoxUtil {
 	/**
 	 * gets the title of a box type
 	 */
-	public static function getBoxTypeTitle($className) {
-		return 'wcf.box.type.'.self::getBoxTypeName($className);
+	public static function getBoxTypeTitle($boxType) {
+		return 'wcf.box.type.'.$boxType;
 	}
 	
 	/**
@@ -50,7 +50,7 @@ final class BoxUtil {
 			$file = str_replace('/', '\\', $file);
 			
 			if (class_exists($file) && ClassUtil::isInstanceOf($file, 'wcf\system\box\IBoxType'))
-				$boxTypes[] = $file;
+				$boxTypes[] = self::getBoxTypeName($file);
 		}
 		
 		return $boxTypes;
