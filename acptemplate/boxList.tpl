@@ -76,9 +76,9 @@
 						</a>
 					</th>
 					
-					<th class="columnText columnClassName{if $sortField == 'className'} active{/if}">
+					<th class="columnText columnBoxType{if $sortField == 'className'} active{/if}">
 						<a href="{link controller='BoxList'}pageNo={@$pageNo}&sortField=className&sortOrder={if $sortField == 'className' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">
-							{lang}wcf.acp.box.className{/lang}
+							{lang}wcf.acp.box.boxType{/lang}
 							
 							{if $sortField == 'title'}
 								<img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />
@@ -107,7 +107,7 @@
 							<td class="columnID columnBoxID"><p>{@$box->boxID}</p></td>
 							<td class="columnText columnName"><p>{$box->name}</p></td>
 							<td class="columnText columnURL columnTitle"><p><a href="{link controller='BoxEdit' id=$box->boxID}{/link}" title="{lang}wcf.global.button.edit{/lang}">{$box->title|language}</a></p></td>
-							<td class="columnText columnClassName"><p>{$box->getBoxTypeTitle()|language}</p></td>
+							<td class="columnText columnBoxType"><p>{$box->getBoxTypeTitle()|language}</p></td>
 							
 							{event name='columns'}
 						</tr>

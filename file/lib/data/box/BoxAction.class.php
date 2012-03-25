@@ -45,7 +45,7 @@ class BoxAction extends \wcf\data\AbstractDatabaseObjectAction {
 		if (!empty($this->objects)) {
 			foreach ($this->objects as $object) {
 				if (preg_match('/wcf\.box\.boxes\.[a-zA-Z0-9]+\.title/', $object->title))
-					I18nHandler::getInstance()->remove($object->title, BoxUtil::getPackageID())
+					I18nHandler::getInstance()->remove($object->title, BoxUtil::getPackageID());
 				
 				$object->getProcessor()->onDelete();
 			}

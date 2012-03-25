@@ -17,7 +17,7 @@ class StaticBoxType extends \wcf\system\box\AbstractBoxType {
 			new \wcf\data\option\Option(null, array(
 				'optionName' => 'content',
 				'optionType' => 'textarea'
-			));
+			))
 		);
 	}
 	

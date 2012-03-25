@@ -1,6 +1,7 @@
 <?php
 namespace wcf\acp\form;
 use \wcf\system\language\I18nHandler;
+use \wcf\system\option\InstantOptionHandler;
 use \wcf\util\BoxUtil;
 use \wcf\system\WCF;
 

@@ -6,6 +6,7 @@ use \wcf\system\exception\UserInputException;
 use \wcf\util\BoxUtil;
 use \wcf\util\StringUtil;
 use \wcf\util\ClassUtil;
+use \wcf\system\menu\acp\ACPMenu;
 use \wcf\system\WCF;
 
 /**
@@ -54,30 +55,30 @@ class BoxAddForm extends ACPForm {
 		parent::readParameters();
 		
 		if ($this->action == 'add') {
-			if (!empty($_GET['boxType']))
-				$this->boxType = StringUtil::trim($_GET['boxType']);
+			if (!empty($_REQUEST['boxType']))
+				$this->boxType = StringUtil::trim($_REQUEST['boxType']);
 			
 			if (empty($this->boxType) || !in_array($this->boxType, BoxUtil::getBoxTypes())) {
+				$boxTypes = array();
+				foreach (BoxUtil::getBoxTypes() as $boxType)
+					$boxTypes[$boxType] = WCF::getLanguage()->get(BoxUtil::getBoxTypeTitle($boxType));
+				
+				ACPMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
+				
 				WCF::getTPL()->assign(array(
-					'availableBoxTypes' => BoxUtil::getBoxTypes()
+					'availableBoxTypes' => $boxTypes,
+					'templateName' => 'boxTypeSelect'
 				));
 				WCF::getTPL()->display('boxTypeSelect');
 				exit;
 			}
 			
-			$boxType = 'wcf\system\box\type\\'.$this->boxType;
+			$boxType = 'wcf\system\box\type\\'.ucfirst($this->boxType).'BoxType';
 			InstantOptionHandler::getInstance()->registerOptions($boxType::getOptions());
 		}
 			
 		
 		I18nHandler::getInstance()->register('title');
-		
-		InstantOptionHandler::getInstance()->registerOptions(array(
-			new \wcf\data\option\Option(null, array(
-				'optionName' => 'content',
-				'optionType' => 'textarea'
-			));
-		));
 	}
 	
 	/**
@@ -88,9 +89,6 @@ class BoxAddForm extends ACPForm {
 		
 		if (!empty($_POST['name']))
 			$this->name = StringUtil::trim($_POST['name']);
-		
-		if (!empty($_POST['boxType']))
-			$this->boxType = StringUtil::trim($_POST['boxType']);
 		
 		if (!empty($_POST['style']))
 			$this->style = StringUtil::trim($_POST['style']);
@@ -117,6 +115,8 @@ class BoxAddForm extends ACPForm {
 				throw new UserInputException('name', 'notValid');
 		}
 		
+		
+		
 		if (!I18nHandler::getInstance()->validateValue('title'))
 			throw new UserInputException('title');
 		
@@ -136,7 +136,7 @@ class BoxAddForm extends ACPForm {
 			'name' => $this->name,
 			'title' => $this->title,
 			'options' => json_encode(InstantOptionHandler::getInstance()->getValues()),
-			'className' => 'wcf\system\box\type\\'.$this->boxType,
+			'className' => 'wcf\system\box\type\\'.ucfirst($this->boxType).'BoxType',
 			'style' => $this->style
 		)));
 		$this->objectAction->executeAction();
@@ -163,10 +163,19 @@ class BoxAddForm extends ACPForm {
 		$this->style = 'title';
 		
 		I18nHandler::getInstance()->disableAssignValueVariables();
+		InstantOptionHandler::getInstance()->disableAssignVariables();
+		
+		$boxTypes = array();
+		foreach (BoxUtil::getBoxTypes() as $boxType)
+			$boxTypes[$boxType] = WCF::getLanguage()->get(BoxUtil::getBoxTypeTitle($boxType));
 		
 		WCF::getTPL()->assign(array(
-			'success' => true
+			'success' => true,
+			'availableBoxTypes' => $boxTypes,
+			'templateName' => 'boxTypeSelect'
 		));
+		WCF::getTPL()->display('boxTypeSelect');
+		exit;
 	}
 	
 	/**
