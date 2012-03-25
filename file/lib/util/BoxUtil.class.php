@@ -55,5 +55,7 @@ final class BoxUtil {
 		
 		return $boxTypes;
 	}
+	
+	private function __construct() { }
 }
 
