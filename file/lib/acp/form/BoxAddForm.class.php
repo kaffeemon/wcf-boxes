@@ -36,11 +36,9 @@ class BoxAddForm extends ACPForm {
 	
 	public $action = 'add';
 	
-	public $boxType = '';
-	
 	public $name = '';
 	public $title = '';
-	public $className = '';
+	public $boxType = '';
 	public $style = 'title';
 	
 	public static $availableStyles = array(
@@ -91,8 +89,8 @@ class BoxAddForm extends ACPForm {
 		if (!empty($_POST['name']))
 			$this->name = StringUtil::trim($_POST['name']);
 		
-		if (!empty($_POST['className']))
-			$this->className = 'wcf\system\box\type\\'.StringUtil::trim($_POST['className']);
+		if (!empty($_POST['boxType']))
+			$this->boxType = StringUtil::trim($_POST['boxType']);
 		
 		if (!empty($_POST['style']))
 			$this->style = StringUtil::trim($_POST['style']);
@@ -125,20 +123,7 @@ class BoxAddForm extends ACPForm {
 		if (!array_key_exists($this->style, static::$availableStyles))
 			throw new UserInputException('style', 'notValid');
 		
-		$this->validateClassName();
-		
 		InstantOptionHandler::getInstance()->validate();
-	}
-	
-	protected function validateClassName() {
-		if (empty($this->className))
-			throw new UserInputException('className');
-		
-		if (!class_exists($this->className))
-			throw new UserInputException('className', 'notValid');
-		
-		if (!ClassUtil::isInstanceOf($this->className, 'wcf\system\box\IBoxType'))
-			throw new UserInputException('className', 'notValid');
 	}
 	
 	/**
@@ -151,7 +136,7 @@ class BoxAddForm extends ACPForm {
 			'name' => $this->name,
 			'title' => $this->title,
 			'options' => json_encode(InstantOptionHandler::getInstance()->getValues()),
-			'className' => $this->className,
+			'className' => 'wcf\system\box\type\\'.$this->boxType,
 			'style' => $this->style
 		)));
 		$this->objectAction->executeAction();
@@ -174,7 +159,7 @@ class BoxAddForm extends ACPForm {
 		$this->saved();
 		
 		// reset values
-		$this->name = $this->title = $this->className = '';
+		$this->name = $this->title = $this->boxType = '';
 		$this->style = 'title';
 		
 		I18nHandler::getInstance()->disableAssignValueVariables();
@@ -204,7 +189,7 @@ class BoxAddForm extends ACPForm {
 			'action' => $this->action,
 			'name' => $this->name,
 			'title' => $this->title,
-			'className' => $this->className,
+			'boxType' => $this->boxType,
 			'style' => $this->style,
 			'availableBoxTypes' => $boxTypes,
 			'availableStyles' => static::$availableStyles,

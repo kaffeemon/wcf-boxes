@@ -49,7 +49,7 @@ class Box extends \wcf\data\ProcessibleDatabaseObject {
 	}
 	
 	public function getBoxTypeTitle() {
-		return BoxUtil::getBoxTypeTitle($this->className);
+		return BoxUtil::getBoxTypeTitle(BoxUtil::getBoxTypeName($this->className));
 	}
 }
 

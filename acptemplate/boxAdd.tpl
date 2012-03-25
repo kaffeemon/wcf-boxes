@@ -61,23 +61,10 @@
 				</dd>
 			</dl>
 			
-			<dl{if $errorField == 'className'} class="wcf-formError"{/if}>
-				<dt><label for="className">{lang}wcf.acp.box.className{/lang}</label></dt>
+			<dl>
+				<dt><label for="boxType">{lang}wcf.acp.box.boxType{/lang}</label></dt>
 				<dd>
-					{if $action == 'add'}
-						{htmlOptions options=$availableBoxTypes selected=$className name=className id=className}
-					{else}
-						<input type="text" id="className" name="className" value="{$className}" disabled="disabled" class="medium" />
-					{/if}
-					{if $errorField == 'className'}
-						<small class="wcf-innerError">
-							{if $errorType == 'empty'}
-								{lang}wcf.global.form.error.empty{/lang}
-							{else}
-								{lang}wcf.acp.box.className.error.{@$errorType}{/lang}
-							{/if}
-						</small>
-					{/if}
+					<input type="text" id="boxType" name="boxType" value="{$boxType}" disabled="disabled" class="medium" />
 				</dd>
 			</dl>
 			

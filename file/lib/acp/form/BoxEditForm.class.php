@@ -105,7 +105,7 @@ class BoxEditForm extends BoxAddForm {
 			
 			$this->name = $this->box->name;
 			$this->title = $this->box->title;
-			$this->className = $this->box->className;
+			$this->boxType = BoxUtil::getBoxTypeName($this->box->className);
 			$this->style = $this->box->style;
 		}
 	}
