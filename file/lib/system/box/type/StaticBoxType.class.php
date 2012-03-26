@@ -1,5 +1,6 @@
 <?php
 namespace wcf\system\box\type;
+use \wcf\system\bbcode\MessageParser;
 use \wcf\system\WCF;
 
 /**
@@ -17,6 +18,16 @@ class StaticBoxType extends \wcf\system\box\AbstractBoxType {
 			new \wcf\data\option\Option(null, array(
 				'optionName' => 'content',
 				'optionType' => 'textarea'
+			)),
+			
+			new \wcf\data\option\Option(null, array(
+				'optionName' => 'enableSmilies',
+				'optionType' => 'boolean'
+			)),
+			
+			new \wcf\data\option\Option(null, array(
+				'optionName' => 'enableBBCodes',
+				'optionType' => 'boolean'
 			)),
 			
 			new \wcf\data\option\Option(null, array(
@@ -41,9 +52,13 @@ class StaticBoxType extends \wcf\system\box\AbstractBoxType {
 		if ($this->enableTPLCode)
 			$content = WCF::getTPL()->fetchString($content);
 		
-		// html
-		if (!$this->enableHTML)
-			$content = \wcf\util\StringUtil::encodeHTML($content);
+		$content = MessageParser::getInstance()->parse(
+			$content,
+			$this->enableSmilies,
+			$this->enableHTML,
+			$this->enableBBCodes,
+			false // keyword highlighting
+		);
 		
 		return $content;
 	}
