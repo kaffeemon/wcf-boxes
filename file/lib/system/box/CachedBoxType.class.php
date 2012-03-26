@@ -55,9 +55,19 @@ abstract class CachedBoxType extends AbstractBoxType {
 	}
 	
 	/**
+	 * @see \wcf\system\box\IBoxType::onUpdate()
+	 */
+	public function onUpdate() {
+		parent::onUpdate();
+		$this->onDelete();
+	}
+	
+	/**
 	 * @see \wcf\system\box\IBoxType::onDelete()
 	 */
 	public function onDelete() {
+		parent::onDelete();
+		
 		if (empty($this->cacheBuilder)) return;
 		
 		if ($this->cacheType >= self::TYPE_BOX) {
