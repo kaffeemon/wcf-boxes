@@ -13,6 +13,6 @@ use \wcf\data\IDatabaseObjectProcessor;
 interface IBoxType extends IDatabaseObjectProcessor {
 	public static function getOptions();
 	public function render();
+	public function onUpdate();
 	public function onDelete();
 }
-
