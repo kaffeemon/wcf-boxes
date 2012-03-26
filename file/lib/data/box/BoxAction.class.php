@@ -37,6 +37,20 @@ class BoxAction extends \wcf\data\AbstractDatabaseObjectAction {
 	);
 	
 	/**
+	 * @see \wcf\data\AbstractDatabaseObjectAction::update()
+	 */
+	public function update() {
+		$count = parent::update();
+		
+		if (!empty($this->objects)) {
+			foreach ($this->objects as $object)
+				$object->getProcessor()->onUpdate();
+		}
+		
+		return $count;
+	}
+	
+	/**
 	 * @see \wcf\data\AbstractDatabaseObjectAction::delete()
 	 */
 	public function delete() {
