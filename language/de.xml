@@ -39,6 +39,8 @@
 	<category name="wcf.box.type">
 		<item name="wcf.box.type.static"><![CDATA[Statischer Inhalt]]></item>
 		<item name="wcf.box.type.static.option.content"><![CDATA[Inhalt]]></item>
+		<item name="wcf.box.type.static.option.enableSmilies"><![CDATA[Darstellung von Smileys aktivieren]]></item>
+		<item name="wcf.box.type.static.option.enableBBCodes"><![CDATA[Darstellung von BBCodes aktivieren]]></item>
 		<item name="wcf.box.type.static.option.enableHTML"><![CDATA[Darstellung von HTML aktivieren]]></item>
 		<item name="wcf.box.type.static.option.enableTPLCode"><![CDATA[Template-Scripting aktivieren]]></item>
 		<item name="wcf.box.type.usersOnline"><![CDATA[Benutzeronlineliste]]></item>
