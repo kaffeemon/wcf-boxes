@@ -1,6 +1,6 @@
 <?php
 namespace wcf\data\box;
-use \wcf\util\BoxUtil;
+use \wcf\data\object\type\ObjectTypeCache;
 
 /**
  * @author		kaffeemon
@@ -9,6 +9,8 @@ use \wcf\util\BoxUtil;
  * @subpackage	data.box
  */
 class Box extends \wcf\data\ProcessibleDatabaseObject {
+	public $className;
+	
 	/**
 	 * @see \wcf\data\ProcessibleDatabaseObject::$processorInterface
 	 */
@@ -32,6 +34,8 @@ class Box extends \wcf\data\ProcessibleDatabaseObject {
 		
 		if (!empty($this->data['options']))
 			$this->data['options'] = json_decode($this->data['options'], true);
+		
+		$this->className = ObjectTypeCache::getObjectType($this->boxTypeID)->boxTypeClassName;
 	}
 	
 	/**
@@ -49,7 +53,7 @@ class Box extends \wcf\data\ProcessibleDatabaseObject {
 	}
 	
 	public function getBoxTypeTitle() {
-		return BoxUtil::getBoxTypeTitle(BoxUtil::getBoxTypeName($this->className));
+		return ObjectTypeCache::getObjectType($this->boxTypeID)->boxTypeTitle;
 	}
 }
 

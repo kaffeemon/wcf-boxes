@@ -9,7 +9,7 @@
 		
 		<item name="wcf.acp.box.data"><![CDATA[Box-Daten]]></item>
 		<item name="wcf.acp.box.name"><![CDATA[Name]]></item>
-		<item name="wcf.acp.box.boxType"><![CDATA[Typ]]></item>
+		<item name="wcf.acp.box.boxTypeID"><![CDATA[Typ]]></item>
 		
 		<item name="wcf.acp.box.display"><![CDATA[Darstellung]]></item>
 		<item name="wcf.acp.box.title"><![CDATA[Titel]]></item>

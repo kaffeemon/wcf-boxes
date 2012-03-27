@@ -2,6 +2,7 @@
 namespace wcf\acp\form;
 use \wcf\system\language\I18nHandler;
 use \wcf\system\option\InstantOptionHandler;
+use \wcf\data\object\type\ObjectTypeCache;
 use \wcf\util\BoxUtil;
 use \wcf\system\WCF;
 
@@ -45,7 +46,7 @@ class BoxEditForm extends BoxAddForm {
 		if (!$this->box->boxID)
 			throw new \wcf\system\exception\IllegalLinkException;
 		
-		$boxType = $this->box->className;
+		$boxType = ObjectTypeCache::getObjectType($this->box->boxTypeID)->boxTypeClassName;
 		InstantOptionHandler::getInstance()->registerOptions($boxType::getOptions());
 	}
 	
@@ -106,7 +107,7 @@ class BoxEditForm extends BoxAddForm {
 			
 			$this->name = $this->box->name;
 			$this->title = $this->box->title;
-			$this->boxType = BoxUtil::getBoxTypeName($this->box->className);
+			$this->boxTypeID = $this->box->boxTypeID;
 			$this->style = $this->box->style;
 		}
 	}

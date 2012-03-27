@@ -3,6 +3,7 @@ namespace wcf\acp\form;
 use \wcf\system\language\I18nHandler;
 use \wcf\system\option\InstantOptionHandler;
 use \wcf\system\exception\UserInputException;
+use \wcf\data\object\type\ObjectTypeCache;
 use \wcf\util\BoxUtil;
 use \wcf\util\StringUtil;
 use \wcf\util\ClassUtil;
@@ -39,7 +40,7 @@ class BoxAddForm extends ACPForm {
 	
 	public $name = '';
 	public $title = '';
-	public $boxType = '';
+	public $boxTypeID = 0;
 	public $style = 'title';
 	
 	public static $availableStyles = array(
@@ -55,13 +56,13 @@ class BoxAddForm extends ACPForm {
 		parent::readParameters();
 		
 		if ($this->action == 'add') {
-			if (!empty($_REQUEST['boxType']))
-				$this->boxType = StringUtil::trim($_REQUEST['boxType']);
+			if (!empty($_REQUEST['boxTypeID']))
+				$this->boxTypeID = StringUtil::trim($_REQUEST['boxTypeID']);
 			
-			if (empty($this->boxType) || !in_array($this->boxType, BoxUtil::getBoxTypes())) {
+			if (empty($this->boxTypeID) || !ObjectTypeCache::getObjectType($this->boxTypeID))) {
 				$boxTypes = array();
-				foreach (BoxUtil::getBoxTypes() as $boxType)
-					$boxTypes[$boxType] = WCF::getLanguage()->get(BoxUtil::getBoxTypeTitle($boxType));
+				foreach (ObjectTypeCache::getObjectTypes('com.github.kaffeemon.boxes.boxType') as $boxType)
+					$boxTypes[$boxType->objectTypeID] = WCF::getLanguage()->get($boxType->boxTypeTitle);
 				
 				ACPMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
 				
@@ -73,7 +74,7 @@ class BoxAddForm extends ACPForm {
 				exit;
 			}
 			
-			$boxType = 'wcf\system\box\type\\'.ucfirst($this->boxType).'BoxType';
+			$boxType = ObjectTypeCache::getObjectType($this->boxTypeID)->boxTypeClassName;
 			InstantOptionHandler::getInstance()->registerOptions($boxType::getOptions());
 		}
 			
@@ -115,8 +116,6 @@ class BoxAddForm extends ACPForm {
 				throw new UserInputException('name', 'notValid');
 		}
 		
-		
-		
 		if (!I18nHandler::getInstance()->validateValue('title'))
 			throw new UserInputException('title');
 		
@@ -136,7 +135,7 @@ class BoxAddForm extends ACPForm {
 			'name' => $this->name,
 			'title' => $this->title,
 			'options' => json_encode(InstantOptionHandler::getInstance()->getValues()),
-			'className' => 'wcf\system\box\type\\'.ucfirst($this->boxType).'BoxType',
+			'boxTypeID' => $this->boxTypeID,
 			'style' => $this->style
 		)));
 		$this->objectAction->executeAction();
@@ -159,15 +158,16 @@ class BoxAddForm extends ACPForm {
 		$this->saved();
 		
 		// reset values
-		$this->name = $this->title = $this->boxType = '';
+		$this->name = $this->title = '';
+		$this->boxTypeID = 0;
 		$this->style = 'title';
 		
 		I18nHandler::getInstance()->disableAssignValueVariables();
 		InstantOptionHandler::getInstance()->disableAssignVariables();
 		
 		$boxTypes = array();
-		foreach (BoxUtil::getBoxTypes() as $boxType)
-			$boxTypes[$boxType] = WCF::getLanguage()->get(BoxUtil::getBoxTypeTitle($boxType));
+		foreach (ObjectTypeCache::getObjectTypes('com.github.kaffeemon.boxes.boxType') as $boxType)
+			$boxTypes[$boxType->objectTypeID] = WCF::getLanguage()->get($boxType->boxTypeTitle);
 		
 		WCF::getTPL()->assign(array(
 			'success' => true,
@@ -188,8 +188,8 @@ class BoxAddForm extends ACPForm {
 		InstantOptionHandler::getInstance()->assignVariables();
 		
 		$boxTypes = array();
-		foreach (BoxUtil::getBoxTypes() as $boxType)
-			$boxTypes[$boxType] = WCF::getLanguage()->get(BoxUtil::getBoxTypeTitle($boxType));
+		foreach (ObjectTypeCache::getObjectTypes('com.github.kaffeemon.boxes.boxType') as $boxType)
+			$boxTypes[$boxType->objectTypeID] = WCF::getLanguage()->get($boxType->boxTypeTitle);
 		
 		foreach (static::$availableStyles as &$style)
 			$style = WCF::getLanguage()->get($style);
@@ -198,11 +198,11 @@ class BoxAddForm extends ACPForm {
 			'action' => $this->action,
 			'name' => $this->name,
 			'title' => $this->title,
-			'boxType' => $this->boxType,
+			'boxTypeID' => $this->boxTypeID,
+			'boxTypeTitle' => ObjectTypeCache::getObjectType($this->boxTypeID)->boxTypeTitle,
 			'style' => $this->style,
 			'availableBoxTypes' => $boxTypes,
-			'availableStyles' => static::$availableStyles,
-			'boxType' => ($this->action == 'add' ? $this->boxType : BoxUtil::getBoxTypeName($this->box->className))
+			'availableStyles' => static::$availableStyles
 		));
 	}
 }

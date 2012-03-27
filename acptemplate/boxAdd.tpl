@@ -62,9 +62,9 @@
 			</dl>
 			
 			<dl>
-				<dt><label for="boxType">{lang}wcf.acp.box.boxType{/lang}</label></dt>
+				<dt><label for="boxTypeID">{lang}wcf.acp.box.boxTypeID{/lang}</label></dt>
 				<dd>
-					<input type="text" id="boxType" value="{lang}wcf.box.type.{$boxType}{/lang}" disabled="disabled" class="medium" />
+					<input type="text" id="boxTypeID" value="{$boxTypeTitle|language}" disabled="disabled" class="medium" />
 				</dd>
 			</dl>
 			
@@ -115,7 +115,7 @@
 		<fieldset>
 			<legend>{lang}wcf.acp.box.options{/lang}</legend>
 			
-			{include file='optionFieldList' options=$options langPrefix='wcf.box.type.'|concat:$boxType:'.option.'}
+			{include file='optionFieldList' options=$options langPrefix=$boxTypeTitle|concat:'.option.'}
 			
 			{event name='optionsFields'}
 		</fieldset>
@@ -128,7 +128,7 @@
 		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
  		{if $boxID|isset}<input type="hidden" name="id" value="{@$boxID}" />{/if}
- 		{if $action == 'add'}<input type="hidden" name="boxType" value="{$boxType}" />{/if}
+ 		{if $action == 'add'}<input type="hidden" name="boxTypeID" value="{$boxTypeID}" />{/if}
  		{@SID_INPUT_TAG}
 	</div>
 </form>
