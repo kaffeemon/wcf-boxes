@@ -1,5 +1,6 @@
 <?php
 namespace wcf\util;
+use \wcf\data\object\type\ObjectTypeCache;
 
 /**
  * @author		kaffeemon
@@ -9,6 +10,7 @@ namespace wcf\util;
  */
 final class BoxUtil {
 	private static $packageID;
+	private static $boxTypes;
 	
 	/**
 	 * returns the packageID of the boxsystem
@@ -21,39 +23,29 @@ final class BoxUtil {
 	}
 	
 	/**
-	 * gets the name of a box type
-	 */
-	public static function getBoxTypeName($className) {
-		$classParts = explode('\\', $className);
-		$boxType = array_pop($classParts);
-		$boxType = preg_replace('/(BoxType)$/', '', $boxType);
-		return lcfirst($boxType);
-	}
-	
-	/**
-	 * gets the title of a box type
-	 */
-	public static function getBoxTypeTitle($boxType) {
-		return 'wcf.box.type.'.$boxType;
-	}
-	
-	/**
-	 * returns all installed box types
+	 * returns all installed box types as boxTypeID => boxTypeTitle|language
 	 */
 	public static function getBoxTypes() {
-		$boxTypes = array();
-		$files = glob(WCF_DIR.'lib/system/box/type/*BoxType.class.php');
-		
-		foreach ($files as $file) {
-			$file = str_replace(WCF_DIR.'lib', 'wcf', $file);
-			$file = preg_replace('/(\.class\.php)$/', '', $file);
-			$file = str_replace('/', '\\', $file);
-			
-			if (class_exists($file) && ClassUtil::isInstanceOf($file, 'wcf\system\box\IBoxType'))
-				$boxTypes[] = self::getBoxTypeName($file);
+		if (self::$boxTypes === null) {
+			self::$boxTypes = array();
+			foreach (ObjectTypeCache::getObjectTypes('com.github.kaffeemon.boxes.boxType') as $boxType)
+				self::$boxTypes[$boxType->objectTypeID] = WCF::getLanguage()->get($boxType->boxTypeTitle);
 		}
 		
-		return $boxTypes;
+		return self::$boxTypes;
+	}
+	
+	/**
+	 * checks if $boxTypeID exists and its definition is correct
+	 */
+	public static function isValidBoxType($boxTypeID) {
+		$boxType = ObjectTypeCache::getObjectType($boxTypeID);
+		$definition = ObjectTypeCache::getObjectTypeDefinitionByName('com.github.kaffeemon.boxes.boxType');
+		
+		if (!$boxType) return false;
+		if ($boxType->definitionID != $definition->definitionID) return false;
+		
+		return true;
 	}
 	
 	private function __construct() { }

@@ -59,15 +59,11 @@ class BoxAddForm extends ACPForm {
 			if (!empty($_REQUEST['boxTypeID']))
 				$this->boxTypeID = StringUtil::trim($_REQUEST['boxTypeID']);
 			
-			if (empty($this->boxTypeID) || !ObjectTypeCache::getObjectType($this->boxTypeID))) {
-				$boxTypes = array();
-				foreach (ObjectTypeCache::getObjectTypes('com.github.kaffeemon.boxes.boxType') as $boxType)
-					$boxTypes[$boxType->objectTypeID] = WCF::getLanguage()->get($boxType->boxTypeTitle);
-				
+			if (empty($this->boxTypeID) || !BoxUtil::isValidBoxType($this->boxTypeID)) {
 				ACPMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
 				
 				WCF::getTPL()->assign(array(
-					'availableBoxTypes' => $boxTypes,
+					'availableBoxTypes' => BoxUtil::getBoxTypes(),
 					'templateName' => 'boxTypeSelect'
 				));
 				WCF::getTPL()->display('boxTypeSelect');
@@ -165,13 +161,9 @@ class BoxAddForm extends ACPForm {
 		I18nHandler::getInstance()->disableAssignValueVariables();
 		InstantOptionHandler::getInstance()->disableAssignVariables();
 		
-		$boxTypes = array();
-		foreach (ObjectTypeCache::getObjectTypes('com.github.kaffeemon.boxes.boxType') as $boxType)
-			$boxTypes[$boxType->objectTypeID] = WCF::getLanguage()->get($boxType->boxTypeTitle);
-		
 		WCF::getTPL()->assign(array(
 			'success' => true,
-			'availableBoxTypes' => $boxTypes,
+			'availableBoxTypes' => BoxUtil::getBoxTypes(),
 			'templateName' => 'boxTypeSelect'
 		));
 		WCF::getTPL()->display('boxTypeSelect');
@@ -187,10 +179,6 @@ class BoxAddForm extends ACPForm {
 		I18nHandler::getInstance()->assignVariables();
 		InstantOptionHandler::getInstance()->assignVariables();
 		
-		$boxTypes = array();
-		foreach (ObjectTypeCache::getObjectTypes('com.github.kaffeemon.boxes.boxType') as $boxType)
-			$boxTypes[$boxType->objectTypeID] = WCF::getLanguage()->get($boxType->boxTypeTitle);
-		
 		foreach (static::$availableStyles as &$style)
 			$style = WCF::getLanguage()->get($style);
 		
@@ -201,7 +189,7 @@ class BoxAddForm extends ACPForm {
 			'boxTypeID' => $this->boxTypeID,
 			'boxTypeTitle' => ObjectTypeCache::getObjectType($this->boxTypeID)->boxTypeTitle,
 			'style' => $this->style,
-			'availableBoxTypes' => $boxTypes,
+			'availableBoxTypes' => BoxUtil::getBoxTypes(),
 			'availableStyles' => static::$availableStyles
 		));
 	}
