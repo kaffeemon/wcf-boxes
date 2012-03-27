@@ -32,9 +32,9 @@
 			<legend>{lang}wcf.acp.box.data{/lang}</legend>
 			
 			<dl>
-				<dt><label for="boxType">{lang}wcf.acp.box.boxType{/lang}</label></dt>
+				<dt><label for="boxTypeID">{lang}wcf.acp.box.boxTypeID{/lang}</label></dt>
 				<dd>
-					{htmlOptions options=$availableBoxTypes name=boxType id=boxType}
+					{htmlOptions options=$availableBoxTypes name=boxTypeID id=boxTypeID}
 				</dd>
 			</dl>
 			
