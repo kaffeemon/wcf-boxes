@@ -27,6 +27,8 @@
 		<instruction type="sql">install.sql</instruction>
 		<instruction type="acpMenu">acpMenu.xml</instruction>
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
+		<instruction type="objectTypeDefinition">objectTypeDefinition.xml</instruction>
+		<instruction type="objectType">objectType.xml</instruction>
 	</instructions>
 	
 	<instructions type="update" fromversion="1.0.0 Alpha *">
@@ -36,6 +38,8 @@
 		<instruction type="acpTemplate">acptemplate.tar</instruction>
 		<instruction type="acpMenu">acpMenu.xml</instruction>
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
+		<instruction type="objectTypeDefinition">objectTypeDefinition.xml</instruction>
+		<instruction type="objectType">objectType.xml</instruction>
 	</instructions>
 </package>
 
