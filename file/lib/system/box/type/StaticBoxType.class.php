@@ -22,12 +22,14 @@ class StaticBoxType extends \wcf\system\box\AbstractBoxType {
 			
 			new \wcf\data\option\Option(null, array(
 				'optionName' => 'enableSmilies',
-				'optionType' => 'boolean'
+				'optionType' => 'boolean',
+				'defaultValue' => 1
 			)),
 			
 			new \wcf\data\option\Option(null, array(
 				'optionName' => 'enableBBCodes',
-				'optionType' => 'boolean'
+				'optionType' => 'boolean',
+				'defaultValue' => 1
 			)),
 			
 			new \wcf\data\option\Option(null, array(
