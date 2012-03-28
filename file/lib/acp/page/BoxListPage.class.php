@@ -33,7 +33,7 @@ class BoxListPage extends \wcf\page\SortablePage {
 	 * @see \wcf\page\SortablePage::$validSortFields
 	 */
 	public $validSortFields = array(
-		'boxID', 'name', 'title', 'className'
+		'boxID', 'name', 'title', 'boxTypeID'
 	);
 	
 	public $deletedBoxID = 0;

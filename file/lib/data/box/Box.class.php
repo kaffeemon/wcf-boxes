@@ -35,7 +35,7 @@ class Box extends \wcf\data\ProcessibleDatabaseObject {
 		if (!empty($this->data['options']))
 			$this->data['options'] = json_decode($this->data['options'], true);
 		
-		$this->className = ObjectTypeCache::getObjectType($this->boxTypeID)->boxTypeClassName;
+		$this->className = ObjectTypeCache::getInstance()->getObjectType($this->boxTypeID)->boxTypeClassName;
 	}
 	
 	/**
@@ -53,7 +53,7 @@ class Box extends \wcf\data\ProcessibleDatabaseObject {
 	}
 	
 	public function getBoxTypeTitle() {
-		return ObjectTypeCache::getObjectType($this->boxTypeID)->boxTypeTitle;
+		return ObjectTypeCache::getInstance()->getObjectType($this->boxTypeID)->boxTypeTitle;
 	}
 }
 

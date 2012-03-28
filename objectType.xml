@@ -5,14 +5,14 @@
 			<name>com.github.kaffeemon.boxes.static</name>
 			<definitionname>com.github.kaffeemon.boxes.boxType</definitionname>
 			<boxTypeClassName>wcf\system\box\type\StaticBoxType</boxTypeClassName>
-			<boxTypeTitle>wcf.boxes.type.static</boxTypeTitle>
+			<boxTypeTitle>wcf.box.type.static</boxTypeTitle>
 		</type>
 		
 		<type>
 			<name>com.github.kaffeemon.boxes.usersOnline</name>
 			<definitionname>com.github.kaffeemon.boxes.boxType</definitionname>
 			<boxTypeClassName>wcf\system\box\type\UsersOnlineBoxType</boxTypeClassName>
-			<boxTypeTitle>wcf.boxes.type.usersOnline</boxTypeTitle>
+			<boxTypeTitle>wcf.box.type.usersOnline</boxTypeTitle>
 		</type>
 	</import>
 </data>

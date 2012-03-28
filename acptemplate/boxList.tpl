@@ -76,9 +76,9 @@
 						</a>
 					</th>
 					
-					<th class="columnText columnBoxType{if $sortField == 'className'} active{/if}">
-						<a href="{link controller='BoxList'}pageNo={@$pageNo}&sortField=className&sortOrder={if $sortField == 'className' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">
-							{lang}wcf.acp.box.boxType{/lang}
+					<th class="columnText columnBoxType{if $sortField == 'boxTypeID'} active{/if}">
+						<a href="{link controller='BoxList'}pageNo={@$pageNo}&sortField=boxTypeID&sortOrder={if $sortField == 'boxTypeID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">
+							{lang}wcf.acp.box.boxTypeID{/lang}
 							
 							{if $sortField == 'title'}
 								<img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />

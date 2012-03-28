@@ -46,7 +46,7 @@ class BoxEditForm extends BoxAddForm {
 		if (!$this->box->boxID)
 			throw new \wcf\system\exception\IllegalLinkException;
 		
-		$boxType = ObjectTypeCache::getObjectType($this->box->boxTypeID)->boxTypeClassName;
+		$boxType = ObjectTypeCache::getInstance()->getObjectType($this->box->boxTypeID)->boxTypeClassName;
 		InstantOptionHandler::getInstance()->registerOptions($boxType::getOptions());
 	}
 	

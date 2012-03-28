@@ -1,6 +1,7 @@
 <?php
 namespace wcf\util;
 use \wcf\data\object\type\ObjectTypeCache;
+use \wcf\system\WCF;
 
 /**
  * @author		kaffeemon
@@ -28,7 +29,7 @@ final class BoxUtil {
 	public static function getBoxTypes() {
 		if (self::$boxTypes === null) {
 			self::$boxTypes = array();
-			foreach (ObjectTypeCache::getObjectTypes('com.github.kaffeemon.boxes.boxType') as $boxType)
+			foreach (ObjectTypeCache::getInstance()->getObjectTypes('com.github.kaffeemon.boxes.boxType') as $boxType)
 				self::$boxTypes[$boxType->objectTypeID] = WCF::getLanguage()->get($boxType->boxTypeTitle);
 		}
 		
@@ -39,8 +40,8 @@ final class BoxUtil {
 	 * checks if $boxTypeID exists and its definition is correct
 	 */
 	public static function isValidBoxType($boxTypeID) {
-		$boxType = ObjectTypeCache::getObjectType($boxTypeID);
-		$definition = ObjectTypeCache::getObjectTypeDefinitionByName('com.github.kaffeemon.boxes.boxType');
+		$boxType = ObjectTypeCache::getInstance()->getObjectType($boxTypeID);
+		$definition = ObjectTypeCache::getInstance()->getDefinitionByName('com.github.kaffeemon.boxes.boxType');
 		
 		if (!$boxType) return false;
 		if ($boxType->definitionID != $definition->definitionID) return false;

@@ -70,7 +70,7 @@ class BoxAddForm extends ACPForm {
 				exit;
 			}
 			
-			$boxType = ObjectTypeCache::getObjectType($this->boxTypeID)->boxTypeClassName;
+			$boxType = ObjectTypeCache::getInstance()->getObjectType($this->boxTypeID)->boxTypeClassName;
 			InstantOptionHandler::getInstance()->registerOptions($boxType::getOptions());
 		}
 			
@@ -187,7 +187,7 @@ class BoxAddForm extends ACPForm {
 			'name' => $this->name,
 			'title' => $this->title,
 			'boxTypeID' => $this->boxTypeID,
-			'boxTypeTitle' => ObjectTypeCache::getObjectType($this->boxTypeID)->boxTypeTitle,
+			'boxTypeTitle' => ObjectTypeCache::getInstance()->getObjectType($this->boxTypeID)->boxTypeTitle,
 			'style' => $this->style,
 			'availableBoxTypes' => BoxUtil::getBoxTypes(),
 			'availableStyles' => static::$availableStyles
