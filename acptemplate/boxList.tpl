@@ -9,15 +9,15 @@
 	//]]>
 </script>
 
-<header class="wcf-container wcf-mainHeading">
-	<img class="wcf-containerIcon" src="{@$__wcf->getPath()}icon/box1.svg" alt="" />
-	<hgroup class="wcf-containerContent">
+<header class="box48 boxHeadline">
+	<img src="{icon}box1.svg{/icon}" alt="" class="icon48" />
+	<hgroup>
 		<h1>{lang}wcf.acp.box.list{/lang}</h1>
 	</hgroup>
 </header>
 
 {if $deletedBoxID}
-	<p class="wcf-success">{lang}wcf.acp.box.delete.success{/lang}</p>
+	<p class="success">{lang}wcf.acp.box.delete.success{/lang}</p>
 {/if}
 
 <div class="wcf-contentHeader">
@@ -27,7 +27,7 @@
 		<ul class="wcf-largeButtons">
 			<li>
 				<a class="wcf-button" href="{link controller='BoxAdd'}{/link}" title="{lang}wcf.acp.box.add{/lang}">
-					<img src="{@$__wcf->getPath()}icon/add1.svg" alt="" />
+					<img src="{icon}add1.svg{/icon}" alt="" />
 					<span>{lang}wcf.acp.box.add{/lang}</span>
 				</a>
 			</li>
@@ -38,7 +38,7 @@
 </div>
 
 {hascontent}
-	<div class="wcf-box wcf-boxTitle wcf-marginTop wcf-shadow1">
+	<div class="container containerPadding marginTop shadow">
 		<hgroup>
 			<h1>{lang}wcf.acp.box.list{/lang} <span class="wcf-badge" title="{lang}wcf.acp.box.list.count{/lang}">{#$items}</span></h1>
 		</hgroup>
@@ -125,7 +125,7 @@
 			<ul class="wcf-largeButtons">
 				<li>
 					<a class="wcf-button" href="{link controller='UpdateServerAdd'}{/link}" title="{lang}wcf.acp.updateServer.add{/lang}">
-						<img src="{@$__wcf->getPath()}icon/add1.svg" alt="" />
+						<img src="{icon}add1.svg{/icon}" alt="" />
 						<span>{lang}wcf.acp.box.add{/lang}</span>
 					</a>
 				</li>

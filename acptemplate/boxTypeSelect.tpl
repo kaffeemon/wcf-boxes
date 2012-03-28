@@ -1,14 +1,14 @@
 {include file='header'}
 
-<header class="wcf-mainHeading wcf-container">
-	<img src="{@$__wcf->getPath('wcf')}icon/add1.svg" alt="" class="wcf-containerIcon" />
-	<hgroup class="wcf-containerContent">
+<header class="box48 boxHeadline">
+	<img src="{icon}add1.svg{/icon}" alt="" class="icon48" />
+	<hgroup>
 		<h1>{lang}wcf.acp.box.add{/lang}</h1>
 	</hgroup>
 </header>
 
 {if $success|isset}
-	<p class="wcf-success">{lang}wcf.global.form.add.success{/lang}</p>	
+	<p class="success">{lang}wcf.global.form.add.success{/lang}</p>	
 {/if}
 
 <div class="wcf-contentHeader">
@@ -27,7 +27,7 @@
 </div>
 
 <form method="get" action="{link controller='BoxAdd'}{/link}">
-	<div class="wcf-box wcf-marginTop wcf-boxPadding wcf-shadow1">
+	<div class="container containerPadding marginTop shadow">
 		<fieldset>
 			<legend>{lang}wcf.acp.box.data{/lang}</legend>
 			
@@ -44,7 +44,7 @@
 		{event name='fieldsets'}
 	</div>
 	
-	<div class="wcf-formSubmit">
+	<div class="formSubmit">
 		<input type="reset" value="{lang}wcf.global.button.reset{/lang}" accesskey="r" />
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
  		{@SID_INPUT_TAG}
