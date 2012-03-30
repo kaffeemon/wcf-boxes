@@ -17,8 +17,12 @@
 	<requiredpackages>
 		<requiredpackage minversion="2.0.0 Alpha 1">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="1.0.0 Alpha 1">com.woltlab.wcf.bbcode</requiredpackage>
-		<requiredpackage minversion="1.0.0 Alpha 2">com.github.kaffeemon.wcf.instantOptions</requiredpackage>
+		<requiredpackage minversion="1.0.0 Alpha 2" file="requirements/com.github.kaffeemon.wcf.instantOptions.tar">com.github.kaffeemon.wcf.instantOptions</requiredpackage>
 	</requiredpackages>
+	
+	<optionalpackages>
+		<optionalpackage minversion="1.0.0 Alpha 1" file="optionalss/com.github.kaffeemon.wcf.box.users.tar">com.github.kaffeemon.wcf.box.users</optionalpackage>
+	</optionalpackages>
 	
 	<instructions type="install">
 		<instruction type="language">language/*.xml</instruction>
