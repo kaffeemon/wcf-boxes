@@ -1,6 +1,6 @@
 <?php
 namespace wcf\system\box;
-use \wcf\util\BoxUtil;
+use \wcf\system\event\EventHandler;
 use \wcf\system\cache\CacheHandler;
 
 /**
@@ -40,6 +40,8 @@ abstract class CachedBoxType extends AbstractBoxType {
 	 */
 	protected function readCache() {
 		if ($this->boxCache !== null) return;
+		
+		EventHandler::getInstance()->fireAction($this, 'readCache');
 		
 		if (empty($this->cacheBuilder))
 			throw new \wcf\system\exception\SystemException('cache builder not specified');
