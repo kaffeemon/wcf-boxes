@@ -60,6 +60,18 @@ abstract class CachedBoxType extends AbstractBoxType {
 	}
 	
 	/**
+	 * clears the box cache
+	 */
+	public function clearCache() {
+		if (empty($this->cacheBuilder)) return;
+		
+		if ($this->cacheIsBoxSpecific) {
+			$cacheName = sprintf('cache.box-%s-%s.php', $this->boxTypeID, $this->name);
+			CacheHandler::getInstance()->clear(WCF_DIR.'cache', $cacheName);
+		}
+	}
+	
+	/**
 	 * @see \wcf\system\box\IBoxType::onUpdate()
 	 */
 	public function onUpdate() {
@@ -73,18 +85,6 @@ abstract class CachedBoxType extends AbstractBoxType {
 	public function onDelete() {
 		parent::onDelete();
 		$this->clearCache();
-	}
-	
-	/**
-	 * clears the box cache
-	 */
-	public function clearCache() {
-		if (empty($this->cacheBuilder)) return;
-		
-		if ($this->cacheIsBoxSpecific) {
-			$cacheName = sprintf('cache.box-%s-%s.php', $this->boxTypeID, $this->name);
-			CacheHandler::getInstance()->clear(WCF_DIR.'cache', $cacheName);
-		}
 	}
 }
 
