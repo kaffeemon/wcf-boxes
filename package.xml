@@ -21,7 +21,7 @@
 	</requiredpackages>
 	
 	<optionalpackages>
-		<optionalpackage minversion="1.0.0 Alpha 1" file="optionalss/com.github.kaffeemon.wcf.box.users.tar">com.github.kaffeemon.wcf.box.users</optionalpackage>
+		<optionalpackage minversion="1.0.0 Alpha 1" file="optionals/com.github.kaffeemon.wcf.box.users.tar">com.github.kaffeemon.wcf.box.users</optionalpackage>
 	</optionalpackages>
 	
 	<instructions type="install">
