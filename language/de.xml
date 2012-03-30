@@ -25,7 +25,7 @@
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.box"><![CDATA[Boxen]]></item>
 		<item name="wcf.acp.menu.link.box.list"><![CDATA[Boxen auflisten]]></item>
-		<item name="wcf.acp.menu.link.box.add"><![CDATA[Boxen hinzufügen]]></item>
+		<item name="wcf.acp.menu.link.box.add"><![CDATA[Box hinzufügen]]></item>
 	</category>
 		
 	<category name="wcf.box">
