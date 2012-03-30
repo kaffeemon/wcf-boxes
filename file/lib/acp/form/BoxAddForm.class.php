@@ -119,6 +119,9 @@ class BoxAddForm extends ACPForm {
 			throw new UserInputException('style', 'notValid');
 		
 		InstantOptionHandler::getInstance()->validate();
+		
+		$boxType = ObjectTypeCache::getInstance()->getObjectType($this->boxTypeID)->boxTypeClassName;
+		$boxType::validateOptions(InstantOptionHandler::getInstance()->getValues());
 	}
 	
 	/**

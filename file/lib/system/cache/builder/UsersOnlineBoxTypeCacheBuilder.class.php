@@ -13,9 +13,6 @@ class UsersOnlineBoxTypeCacheBuilder implements ICacheBuilder {
 	 * @see \wcf\system\cache\ICacheBuilder::getData()
 	 */
 	public function getData(array $cacheResource) {
-		//list($cache, $boxID) = explode('-', $cacheResource['cache']);
-		//$box = new \wcf\data\box\Box($boxID);
-		
 		$data = array(
 			'usersOnline' => array()
 		);

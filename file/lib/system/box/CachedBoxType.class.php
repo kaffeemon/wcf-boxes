@@ -47,7 +47,7 @@ abstract class CachedBoxType extends AbstractBoxType {
 			throw new \wcf\system\exception\SystemException('cache builder not specified');
 		
 		$cacheName = 'box-'.$this->boxTypeID;
-		if ($this->cacheIsBoxSpecific) $cacheName .= '-'.$this->name;
+		if ($this->cacheIsBoxSpecific) $cacheName .= '-'.$this->boxID;
 		
 		CacheHandler::getInstance()->addResource(
 			$cacheName,
@@ -66,7 +66,7 @@ abstract class CachedBoxType extends AbstractBoxType {
 		if (empty($this->cacheBuilder)) return;
 		
 		if ($this->cacheIsBoxSpecific) {
-			$cacheName = sprintf('cache.box-%s-%s.php', $this->boxTypeID, $this->name);
+			$cacheName = sprintf('cache.box-%s-%s.php', $this->boxTypeID, $this->boxID);
 			CacheHandler::getInstance()->clear(WCF_DIR.'cache', $cacheName);
 		}
 	}
