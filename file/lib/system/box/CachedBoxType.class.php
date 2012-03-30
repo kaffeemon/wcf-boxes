@@ -54,7 +54,7 @@ abstract class CachedBoxType extends AbstractBoxType {
 	 */
 	public function onUpdate() {
 		parent::onUpdate();
-		$this->onDelete();
+		$this->clearCache();
 	}
 	
 	/**
@@ -62,7 +62,13 @@ abstract class CachedBoxType extends AbstractBoxType {
 	 */
 	public function onDelete() {
 		parent::onDelete();
-		
+		$this->clearCache();
+	}
+	
+	/**
+	 * clears the box cache
+	 */
+	public function clearCache() {
 		if (empty($this->cacheBuilder)) return;
 		
 		if ($this->cacheIsBoxSpecific) {
