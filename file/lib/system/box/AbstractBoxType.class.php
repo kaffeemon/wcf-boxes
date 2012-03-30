@@ -22,12 +22,6 @@ abstract class AbstractBoxType extends \wcf\data\DatabaseObjectDecorator impleme
 	public $templateName = '';
 	
 	/**
-	 * badge of the box
-	 * @var string
-	 */
-	public $badge;
-	
-	/**
 	 * @see \wcf\system\box\IBoxType::getOptions()
 	 */
 	public static function getOptions() {
@@ -44,8 +38,7 @@ abstract class AbstractBoxType extends \wcf\data\DatabaseObjectDecorator impleme
 		if ($this->disabled || empty($this->templateName)) return '';
 		
 		return WCF::getTPL()->fetch($this->templateName, array(
-			'box' => $this,
-			'badge' => $this->badge
+			'box' => $this
 		));
 	}
 	

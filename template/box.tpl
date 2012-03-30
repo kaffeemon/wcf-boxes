@@ -4,7 +4,6 @@
 	<div class="containerHead">
 		<div class="containerContent">
 			<h3>{$box->title|language}</h3>
-			{if $badge|isset && $badge > 0}<span class="badge">{#$badge}</span>{/if}
 		</div>
 	</div>
 	{/if}
