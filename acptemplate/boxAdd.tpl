@@ -115,7 +115,7 @@
 		<fieldset>
 			<legend>{lang}wcf.acp.box.options{/lang}</legend>
 			
-			{include file='optionFieldList' options=$options langPrefix=$boxTypeTitle|concat:'.option.'}
+			{@$options}
 			
 			{event name='optionsFields'}
 		</fieldset>

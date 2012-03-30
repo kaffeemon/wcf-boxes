@@ -1,7 +1,7 @@
 <?php
 namespace wcf\acp\form;
 use \wcf\system\language\I18nHandler;
-use \wcf\system\option\InstantOptionHandler;
+use \wcf\page\util\InstantOptionHelper;
 use \wcf\system\exception\UserInputException;
 use \wcf\data\object\type\ObjectTypeCache;
 use \wcf\util\BoxUtil;
@@ -42,6 +42,7 @@ class BoxAddForm extends ACPForm {
 	public $title = '';
 	public $boxTypeID = 0;
 	public $style = 'title';
+	public $optionHelper;
 	
 	public static $availableStyles = array(
 		'title' => 'wcf.acp.box.style.title',
@@ -71,7 +72,9 @@ class BoxAddForm extends ACPForm {
 			}
 			
 			$boxType = ObjectTypeCache::getInstance()->getObjectType($this->boxTypeID)->boxTypeClassName;
-			InstantOptionHandler::getInstance()->registerOptions($boxType::getOptions());
+			$boxTypeTitle = ObjectTypeCache::getInstance()->getObjectType($this->boxTypeID)->boxTypeTitle;
+			$this->optionHelper = new InstantOptionHandler('options', $boxTypeTitle);
+			$this->optionHelper->registerOptions($boxType::getOptions());
 		}
 			
 		
@@ -95,7 +98,7 @@ class BoxAddForm extends ACPForm {
 		if (I18nHandler::getInstance()->isPlainValue('title'))
 			$this->title = I18nHandler::getInstance()->getValue('title');
 		
-		InstantOptionHandler::getInstance()->readValues();
+		$this->optionHelper->readValues();
 	}
 	
 	/**
@@ -118,10 +121,8 @@ class BoxAddForm extends ACPForm {
 		if (!array_key_exists($this->style, static::$availableStyles))
 			throw new UserInputException('style', 'notValid');
 		
-		InstantOptionHandler::getInstance()->validate();
-		
 		$boxType = ObjectTypeCache::getInstance()->getObjectType($this->boxTypeID)->boxTypeClassName;
-		$boxType::validateOptions(InstantOptionHandler::getInstance()->getValues());
+		$this->optionHelper->validate(array($boxType, 'validateOptions'));
 	}
 	
 	/**
@@ -133,7 +134,7 @@ class BoxAddForm extends ACPForm {
 		$this->objectAction = new \wcf\data\box\BoxAction(array(), 'create', array('data' => array(
 			'name' => $this->name,
 			'title' => $this->title,
-			'options' => json_encode(InstantOptionHandler::getInstance()->getValues()),
+			'options' => json_encode($this->optionHelper->getValues()),
 			'boxTypeID' => $this->boxTypeID,
 			'style' => $this->style
 		)));
@@ -152,8 +153,6 @@ class BoxAddForm extends ACPForm {
 			$boxEditor->update(array('title' => 'wcf.box.boxes.'.$this->name.'.title'));
 		}
 		
-		// TODO cache leeren?
-		
 		$this->saved();
 		
 		// reset values
@@ -162,7 +161,7 @@ class BoxAddForm extends ACPForm {
 		$this->style = 'title';
 		
 		I18nHandler::getInstance()->disableAssignValueVariables();
-		InstantOptionHandler::getInstance()->disableAssignVariables();
+		$this->optionHelper->disableAssignVariables();
 		
 		WCF::getTPL()->assign(array(
 			'success' => true,
@@ -180,7 +179,6 @@ class BoxAddForm extends ACPForm {
 		parent::assignVariables();
 		
 		I18nHandler::getInstance()->assignVariables();
-		InstantOptionHandler::getInstance()->assignVariables();
 		
 		foreach (static::$availableStyles as &$style)
 			$style = WCF::getLanguage()->get($style);
@@ -192,6 +190,7 @@ class BoxAddForm extends ACPForm {
 			'boxTypeID' => $this->boxTypeID,
 			'boxTypeTitle' => ObjectTypeCache::getInstance()->getObjectType($this->boxTypeID)->boxTypeTitle,
 			'style' => $this->style,
+			'options' => $this->optionHelper->render(),
 			'availableBoxTypes' => BoxUtil::getBoxTypes(),
 			'availableStyles' => static::$availableStyles
 		));

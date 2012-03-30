@@ -4,8 +4,8 @@
 		<packagename><![CDATA[Boxes]]></packagename>
 		<packagedescription><![CDATA[a boxes system for the wcf2]]></packagedescription>
 		<isunique>1</isunique>
-		<version>1.0.0 Alpha 4</version>
-		<date>2012-03-28</date>
+		<version>1.0.0 Alpha 5</version>
+		<date>2012-03-31</date>
 		<plugin>com.woltlab.wcf</plugin>
 	</packageinformation>
 	
@@ -17,7 +17,7 @@
 	<requiredpackages>
 		<requiredpackage minversion="2.0.0 Alpha 1">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="1.0.0 Alpha 1">com.woltlab.wcf.bbcode</requiredpackage>
-		<requiredpackage minversion="1.0.0 Alpha 2" file="requirements/com.github.kaffeemon.wcf.instantOptions.tar">com.github.kaffeemon.wcf.instantOptions</requiredpackage>
+		<requiredpackage minversion="1.0.0 Alpha 3" file="requirements/com.github.kaffeemon.wcf.instantOptions.tar">com.github.kaffeemon.wcf.instantOptions</requiredpackage>
 	</requiredpackages>
 	
 	<optionalpackages>

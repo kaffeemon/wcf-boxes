@@ -1,7 +1,7 @@
 <?php
 namespace wcf\acp\form;
 use \wcf\system\language\I18nHandler;
-use \wcf\system\option\InstantOptionHandler;
+use \wcf\page\util\InstantOptionHelper;
 use \wcf\data\object\type\ObjectTypeCache;
 use \wcf\util\BoxUtil;
 use \wcf\system\WCF;
@@ -47,7 +47,9 @@ class BoxEditForm extends BoxAddForm {
 			throw new \wcf\system\exception\IllegalLinkException;
 		
 		$boxType = ObjectTypeCache::getInstance()->getObjectType($this->box->boxTypeID)->boxTypeClassName;
-		InstantOptionHandler::getInstance()->registerOptions($boxType::getOptions());
+		$boxTypeTitle = ObjectTypeCache::getInstance()->getObjectType($this->box->boxTypeID)->boxTypeTitle;
+		$this->optionHelper = new InstantOptionHandler('options', $boxTypeTitle);
+		$this->optionHelper->registerOptions($boxType::getOptions());
 	}
 	
 	/**
@@ -73,11 +75,9 @@ class BoxEditForm extends BoxAddForm {
 			);
 		}
 		
-		// TODO cache leeren?
-		
 		$this->objectAction = new \wcf\data\box\BoxAction(array($this->boxID), 'update', array('data' => array(
 			'title' => $this->title,
-			'options' => json_encode(InstantOptionHandler::getInstance()->getValues()),
+			'options' => json_encode($this->optionHelper->getValues()),
 			'style' => $this->style
 		)));
 		$this->objectAction->executeAction();
@@ -103,7 +103,7 @@ class BoxEditForm extends BoxAddForm {
 				'wcf.box.boxes.[a-zA-Z0-9]+.title'
 			);
 			
-			InstantOptionHandler::getInstance()->setValues($this->box->options);
+			$this->optionHelper->setValues($this->box->options);
 			
 			$this->name = $this->box->name;
 			$this->title = $this->box->title;
