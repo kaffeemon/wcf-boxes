@@ -20,14 +20,14 @@
 	<p class="success">{lang}wcf.acp.box.delete.success{/lang}</p>
 {/if}
 
-<div class="wcf-contentHeader">
+<div class="contentNavigation">
 	{pages print=true assign=pagesLinks controller="BoxList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 	
 	<nav>
-		<ul class="wcf-largeButtons">
+		<ul>
 			<li>
-				<a class="wcf-button" href="{link controller='BoxAdd'}{/link}" title="{lang}wcf.acp.box.add{/lang}">
-					<img src="{icon}add1.svg{/icon}" alt="" />
+				<a class="button" href="{link controller='BoxAdd'}{/link}" title="{lang}wcf.acp.box.add{/lang}">
+					<img src="{icon}add1.svg{/icon}" alt="" class="icon24" />
 					<span>{lang}wcf.acp.box.add{/lang}</span>
 				</a>
 			</li>
@@ -40,10 +40,10 @@
 {hascontent}
 	<div class="container containerPadding marginTop shadow">
 		<hgroup>
-			<h1>{lang}wcf.acp.box.list{/lang} <span class="wcf-badge" title="{lang}wcf.acp.box.list.count{/lang}">{#$items}</span></h1>
+			<h1>{lang}wcf.acp.box.list{/lang} <span class="badge" title="{lang}wcf.acp.box.list.count{/lang}">{#$items}</span></h1>
 		</hgroup>
 		
-		<table class="wcf-table big">
+		<table class="table">
 			<thead>
 				<tr>
 					<th class="columnID columnBoxID{if $sortField == 'boxID'} active{/if}" colspan="2">
@@ -51,7 +51,7 @@
 							{lang}wcf.global.objectID{/lang}
 							
 							{if $sortField == 'boxID'}
-								<img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />
+								<img src="{icon}sort{@$sortOrder}.svg{/icon}" alt="" />
 							{/if}
 						</a>
 					</th>
@@ -61,7 +61,7 @@
 							{lang}wcf.acp.box.name{/lang}
 							
 							{if $sortField == 'name'}
-								<img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />
+								<img src="{icon}sort{@$sortOrder}.svg{/icon}" alt="" />
 							{/if}
 						</a>
 					</th>
@@ -71,7 +71,7 @@
 							{lang}wcf.acp.box.title{/lang}
 							
 							{if $sortField == 'title'}
-								<img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />
+								<img src="{icon}sort{@$sortOrder}.svg{/icon}" alt="" />
 							{/if}
 						</a>
 					</th>
@@ -80,8 +80,8 @@
 						<a href="{link controller='BoxList'}pageNo={@$pageNo}&sortField=boxTypeID&sortOrder={if $sortField == 'boxTypeID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">
 							{lang}wcf.acp.box.boxTypeID{/lang}
 							
-							{if $sortField == 'title'}
-								<img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />
+							{if $sortField == 'boxTypeID'}
+								<img src="{icon}sort{@$sortOrder}.svg{/icon}" alt="" />
 							{/if}
 						</a>
 					</th>
@@ -95,11 +95,11 @@
 					{foreach from=$objects item=box}
 						<tr class="jsBoxRow">
 							<td class="columnIcon">
-								<img src="{@$__wcf->getPath()}icon/{if !$box->disabled}enabled{else}disabled{/if}1.svg" alt="" title="{lang}wcf.global.button.{if !$box->disabled}disable{else}enable{/if}{/lang}" class="jsToggleButton jsTooltip" data-object-id="{@$box->boxID}" data-disable-message="{lang}wcf.global.button.disable{/lang}" data-enable-message="{lang}wcf.global.button.enable{/lang}" />
+								<img src="{icon}{if !$box->disabled}enabled{else}disabled{/if}1.svg{/icon}" alt="" title="{lang}wcf.global.button.{if !$box->disabled}disable{else}enable{/if}{/lang}" class="jsToggleButton jsTooltip icon16" data-object-id="{@$box->boxID}" data-disable-message="{lang}wcf.global.button.disable{/lang}" data-enable-message="{lang}wcf.global.button.enable{/lang}" />
 								
-								<a href="{link controller='BoxEdit' id=$box->boxID}{/link}"><img src="{@$__wcf->getPath()}icon/edit1.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip" /></a>
+								<a href="{link controller='BoxEdit' id=$box->boxID}{/link}"><img src="{icon}edit1.svg{/icon}" alt="" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip icon16" /></a>
 								
-								<img src="{@$__wcf->getPath()}icon/delete1.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" class="jsDeleteButton jsTooltip" data-object-id="{@$box->boxID}" data-confirm-message="{lang}wcf.acp.box.delete.sure{/lang}" />
+								<img src="{icon}delete1.svg{/icon}" alt="" title="{lang}wcf.global.button.delete{/lang}" class="jsDeleteButton jsTooltip icon16" data-object-id="{@$box->boxID}" data-confirm-message="{lang}wcf.acp.box.delete.sure{/lang}" />
 								
 								{event name='buttons'}
 							</td>
@@ -115,25 +115,25 @@
 				{/content}
 			</tbody>
 		</table>
-		
 	</div>
 	
-	<div class="wcf-contentFooter">
+	<div class="contentNavigation">
 		{@$pagesLinks}
-		
+	
 		<nav>
-			<ul class="wcf-largeButtons">
+			<ul>
 				<li>
-					<a class="wcf-button" href="{link controller='UpdateServerAdd'}{/link}" title="{lang}wcf.acp.updateServer.add{/lang}">
-						<img src="{icon}add1.svg{/icon}" alt="" />
+					<a class="button" href="{link controller='BoxAdd'}{/link}" title="{lang}wcf.acp.box.add{/lang}">
+						<img src="{icon}add1.svg{/icon}" alt="" class="icon24" />
 						<span>{lang}wcf.acp.box.add{/lang}</span>
 					</a>
 				</li>
-				
+			
 				{event name='largeButtons'}
 			</ul>
 		</nav>
 	</div>
+	
 {hascontentelse}
 	<p class="warning">{lang}wcf.acp.box.list.noneAvailable{/lang}</p>
 {/hascontent}

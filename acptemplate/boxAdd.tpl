@@ -25,12 +25,12 @@
 	<p class="success">{lang}wcf.global.form.{$action}.success{/lang}</p>	
 {/if}
 
-<div class="wcf-contentHeader">
+<div class="contentNavigation">
 	<nav>
-		<ul class="wcf-largeButtons">
+		<ul>
 			<li>
-				<a href="{link controller='BoxList'}{/link}" title="{lang}wcf.acp.menu.link.box.list{/lang}" class="wcf-button">
-					<img src="{icon}box1.svg{/icon}" alt="" />
+				<a href="{link controller='BoxList'}{/link}" title="{lang}wcf.acp.menu.link.box.list{/lang}" class="button">
+					<img src="{icon}box1.svg{/icon}" alt="" class="icon24" />
 					<span>{lang}wcf.acp.menu.link.box.list{/lang}</span>
 				</a>
 			</li>
