@@ -28,5 +28,14 @@ class UsersOnlineBoxType extends \wcf\system\box\CachedBoxType {
 	 * @see \wcf\system\box\CachedBoxType::$cacheBuilder
 	 */
 	public $cacheBuilder = 'wcf\system\cache\builder\UsersOnlineBoxTypeCacheBuilder';
+	
+	/**
+	 * @see \wcf\system\box\IBoxType::render()
+	 */
+	public function render() {
+		$this->readCache();
+		$this->badge = count($this->boxCache->usersOnline);
+		parent::render();
+	}
 }
 

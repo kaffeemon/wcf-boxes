@@ -31,6 +31,16 @@ abstract class CachedBoxType extends AbstractBoxType {
 	 * @see \wcf\system\box\IBoxType::render()
 	 */
 	public function render() {
+		$this->readCache();
+		return parent::render();
+	}
+	
+	/**
+	 * reads the cache
+	 */
+	protected function readCache() {
+		if ($this->boxCache !== null) return;
+		
 		if (empty($this->cacheBuilder))
 			throw new \wcf\system\exception\SystemException('cache builder not specified');
 		
@@ -45,8 +55,6 @@ abstract class CachedBoxType extends AbstractBoxType {
 		);
 		
 		$this->boxCache = CacheHandler::getInstance()->get($cacheName);
-		
-		return parent::render();
 	}
 	
 	/**
