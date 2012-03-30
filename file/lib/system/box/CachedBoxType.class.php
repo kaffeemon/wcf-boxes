@@ -10,10 +10,6 @@ use \wcf\system\cache\CacheHandler;
  * @subpackage	system.box
  */
 abstract class CachedBoxType extends AbstractBoxType {
-	const TYPE_GENERAL = 0,
-			TYPE_BOX = 1,
-			TYPE_USER = 2;
-	
 	public $boxCache;
 	
 	/**
@@ -22,9 +18,9 @@ abstract class CachedBoxType extends AbstractBoxType {
 	public $maxLifetime = 300;
 	
 	/**
-	 * type of caching
+	 * is caching box specific or is there one cache for all boxes of a type
 	 */
-	public $cacheType = self::TYPE_GENERAL;
+	public $cacheIsBoxSpecific = true;
 	
 	/**
 	 * cache builder
@@ -38,9 +34,8 @@ abstract class CachedBoxType extends AbstractBoxType {
 		if (empty($this->cacheBuilder))
 			throw new \wcf\system\exception\SystemException('cache builder not specified');
 		
-		$cacheName = 'box-'.BoxUtil::getBoxTypeName(get_class($this));
-		if ($this->cacheType >= self::TYPE_BOX) $cacheName .= '-'.$this->name;
-		if ($this->cacheType >= self::TYPE_USER) $cacheName .= '-'.WCF::getUser()->userID;
+		$cacheName = 'box-'.$this->boxTypeID;
+		if ($this->cacheIsBoxSpecific) $cacheName .= '-'.$this->name;
 		
 		CacheHandler::getInstance()->addResource(
 			$cacheName,
@@ -70,11 +65,8 @@ abstract class CachedBoxType extends AbstractBoxType {
 		
 		if (empty($this->cacheBuilder)) return;
 		
-		if ($this->cacheType >= self::TYPE_BOX) {
-			$boxType = BoxUtil::getBoxTypeName(get_class($this));
-			$boxUser = ($this->cacheType >= self::TYPE_USER ? '-*' : '');
-			
-			$cacheName = sprintf('cache.box-%s-%s%s.php', $boxType, $this->name, $boxUser);
+		if ($this->cacheIsBoxSpecific) {
+			$cacheName = sprintf('cache.box-%s-%s.php', $this->boxTypeID, $this->name);
 			CacheHandler::getInstance()->clear(WCF_DIR.'cache', $cacheName);
 		}
 	}

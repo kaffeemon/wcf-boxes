@@ -20,9 +20,9 @@ class UsersOnlineBoxType extends \wcf\system\box\CachedBoxType {
 	public $maxLifetime = 60;
 	
 	/**
-	 * @see \wcf\system\box\CachedBoxType::$cacheType
+	 * @see \wcf\system\box\CachedBoxType::$cacheIsBoxSpecific
 	 */
-	public $cacheType = \wcf\system\box\CachedBoxType::TYPE_GENERAL;
+	public $cacheIsBoxSpecific = false;
 	
 	/**
 	 * @see \wcf\system\box\CachedBoxType::$cacheBuilder
