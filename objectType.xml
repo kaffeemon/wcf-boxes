@@ -2,14 +2,14 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/object-type.xsd">
 	<import>
 		<type>
-			<name>com.github.kaffeemon.boxes.static</name>
+			<name>com.github.kaffeemon.box.static</name>
 			<definitionname>com.github.kaffeemon.boxes.boxType</definitionname>
 			<boxTypeClassName>wcf\system\box\type\StaticBoxType</boxTypeClassName>
 			<boxTypeTitle>wcf.box.type.static</boxTypeTitle>
 		</type>
 		
 		<type>
-			<name>com.github.kaffeemon.boxes.usersOnline</name>
+			<name>com.github.kaffeemon.box.usersOnline</name>
 			<definitionname>com.github.kaffeemon.boxes.boxType</definitionname>
 			<boxTypeClassName>wcf\system\box\type\UsersOnlineBoxType</boxTypeClassName>
 			<boxTypeTitle>wcf.box.type.usersOnline</boxTypeTitle>
