@@ -32,7 +32,7 @@ abstract class AbstractBoxType extends \wcf\data\DatabaseObjectDecorator impleme
 	/**
 	 * @see \wcf\sytem\box\IBoxType::validateOptions()
 	 */
-	public static function validateOptions() {
+	public static function validateOptions($options) {
 		EventHandler::getInstance()->fireAction(__CLASS__, 'validateOptions');
 	}
 	

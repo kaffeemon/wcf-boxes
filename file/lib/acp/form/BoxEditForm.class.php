@@ -52,6 +52,7 @@ class BoxEditForm extends BoxAddForm {
 		$this->optionHelper->registerOptions($boxType::getOptions());
 		
 		$this->boxTypeID = $this->box->boxTypeID;
+		$this->name = $this->box->name;
 	}
 	
 	/**
@@ -60,7 +61,6 @@ class BoxEditForm extends BoxAddForm {
 	public function save() {
 		ACPForm::save();
 		
-		$this->name = $this->box->name;
 		$this->title = 'wcf.box.boxes.'.$this->box->name.'.title';
 		if (I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->remove(
