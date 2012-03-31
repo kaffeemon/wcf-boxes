@@ -73,7 +73,7 @@ class BoxAddForm extends ACPForm {
 			
 			$boxType = ObjectTypeCache::getInstance()->getObjectType($this->boxTypeID)->boxTypeClassName;
 			$boxTypeTitle = ObjectTypeCache::getInstance()->getObjectType($this->boxTypeID)->boxTypeTitle;
-			$this->optionHelper = new InstantOptionHandler('options', $boxTypeTitle);
+			$this->optionHelper = new InstantOptionHelper('options', $boxTypeTitle.'.option');
 			$this->optionHelper->registerOptions($boxType::getOptions());
 		}
 			

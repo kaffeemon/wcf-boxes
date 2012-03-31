@@ -48,8 +48,10 @@ class BoxEditForm extends BoxAddForm {
 		
 		$boxType = ObjectTypeCache::getInstance()->getObjectType($this->box->boxTypeID)->boxTypeClassName;
 		$boxTypeTitle = ObjectTypeCache::getInstance()->getObjectType($this->box->boxTypeID)->boxTypeTitle;
-		$this->optionHelper = new InstantOptionHandler('options', $boxTypeTitle);
+		$this->optionHelper = new InstantOptionHelper('options', $boxTypeTitle.'.option');
 		$this->optionHelper->registerOptions($boxType::getOptions());
+		
+		$this->boxTypeID = $this->box->boxTypeID;
 	}
 	
 	/**
@@ -58,6 +60,7 @@ class BoxEditForm extends BoxAddForm {
 	public function save() {
 		ACPForm::save();
 		
+		$this->name = $this->box->name;
 		$this->title = 'wcf.box.boxes.'.$this->box->name.'.title';
 		if (I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->remove(
