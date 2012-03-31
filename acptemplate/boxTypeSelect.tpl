@@ -1,7 +1,7 @@
 {include file='header'}
 
 <header class="box48 boxHeadline">
-	<img src="{icon}add1.svg{/icon}" alt="" class="icon48" />
+	<img src="{icon}add1{/icon}" alt="" class="icon48" />
 	<hgroup>
 		<h1>{lang}wcf.acp.box.add{/lang}</h1>
 	</hgroup>
@@ -16,7 +16,7 @@
 		<ul>
 			<li>
 				<a href="{link controller='BoxList'}{/link}" title="{lang}wcf.acp.menu.link.box.list{/lang}" class="button">
-					<img src="{icon}box1.svg{/icon}" alt="" class="icon24" />
+					<img src="{icon}box1{/icon}" alt="" class="icon24" />
 					<span>{lang}wcf.acp.menu.link.box.list{/lang}</span>
 				</a>
 			</li>
