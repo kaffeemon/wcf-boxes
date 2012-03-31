@@ -10,7 +10,7 @@
 </script>
 
 <header class="box48 boxHeadline">
-	<img src="{icon}box1{/icon}" alt="" class="icon48" />
+	<img src="{@$__wcf->getPath()}icon/box1.svg" alt="" class="icon48" />
 	<hgroup>
 		<h1>{lang}wcf.acp.box.list{/lang}</h1>
 	</hgroup>
@@ -27,7 +27,7 @@
 		<ul>
 			<li>
 				<a class="button" href="{link controller='BoxAdd'}{/link}" title="{lang}wcf.acp.box.add{/lang}">
-					<img src="{icon}add1{/icon}" alt="" class="icon24" />
+					<img src="{@$__wcf->getPath()}icon/add1.svg" alt="" class="icon24" />
 					<span>{lang}wcf.acp.box.add{/lang}</span>
 				</a>
 			</li>
@@ -51,7 +51,7 @@
 							{lang}wcf.global.objectID{/lang}
 							
 							{if $sortField == 'boxID'}
-								<img src="{icon}sort{@$sortOrder}{/icon}" alt="" />
+								<img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />
 							{/if}
 						</a>
 					</th>
@@ -61,7 +61,7 @@
 							{lang}wcf.acp.box.name{/lang}
 							
 							{if $sortField == 'name'}
-								<img src="{icon}sort{@$sortOrder}{/icon}" alt="" />
+								<img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />
 							{/if}
 						</a>
 					</th>
@@ -71,7 +71,7 @@
 							{lang}wcf.acp.box.title{/lang}
 							
 							{if $sortField == 'title'}
-								<img src="{icon}sort{@$sortOrder}{/icon}" alt="" />
+								<img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />
 							{/if}
 						</a>
 					</th>
@@ -81,7 +81,7 @@
 							{lang}wcf.acp.box.boxTypeID{/lang}
 							
 							{if $sortField == 'boxTypeID'}
-								<img src="{icon}sort{@$sortOrder}{/icon}" alt="" />
+								<img src="{@$__wcf->getPath()}icon/sort{@$sortOrder}.svg" alt="" />
 							{/if}
 						</a>
 					</th>
@@ -95,11 +95,11 @@
 					{foreach from=$objects item=box}
 						<tr class="jsBoxRow">
 							<td class="columnIcon">
-								<img src="{icon}{if !$box->disabled}enabled{else}disabled{/if}1{/icon}" alt="" title="{lang}wcf.global.button.{if !$box->disabled}disable{else}enable{/if}{/lang}" class="jsToggleButton jsTooltip icon16" data-object-id="{@$box->boxID}" data-disable-message="{lang}wcf.global.button.disable{/lang}" data-enable-message="{lang}wcf.global.button.enable{/lang}" />
+								<img src="{@$__wcf->getPath()}icon/{if !$box->disabled}enabled{else}disabled{/if}1.svg" alt="" title="{lang}wcf.global.button.{if !$box->disabled}disable{else}enable{/if}{/lang}" class="jsToggleButton jsTooltip icon16" data-object-id="{@$box->boxID}" data-disable-message="{lang}wcf.global.button.disable{/lang}" data-enable-message="{lang}wcf.global.button.enable{/lang}" />
 								
-								<a href="{link controller='BoxEdit' id=$box->boxID}{/link}"><img src="{icon}edit1{/icon}" alt="" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip icon16" /></a>
+								<a href="{link controller='BoxEdit' id=$box->boxID}{/link}"><img src="{@$__wcf->getPath()}icon/edit1.svg" alt="" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip icon16" /></a>
 								
-								<img src="{icon}delete1{/icon}" alt="" title="{lang}wcf.global.button.delete{/lang}" class="jsDeleteButton jsTooltip icon16" data-object-id="{@$box->boxID}" data-confirm-message="{lang}wcf.acp.box.delete.sure{/lang}" />
+								<img src="{@$__wcf->getPath()}icon/delete1.svg" alt="" title="{lang}wcf.global.button.delete{/lang}" class="jsDeleteButton jsTooltip icon16" data-object-id="{@$box->boxID}" data-confirm-message="{lang}wcf.acp.box.delete.sure{/lang}" />
 								
 								{event name='buttons'}
 							</td>
@@ -124,7 +124,7 @@
 			<ul>
 				<li>
 					<a class="button" href="{link controller='BoxAdd'}{/link}" title="{lang}wcf.acp.box.add{/lang}">
-						<img src="{icon}add1{/icon}" alt="" class="icon24" />
+						<img src="{@$__wcf->getPath()}icon/add1.svg" alt="" class="icon24" />
 						<span>{lang}wcf.acp.box.add{/lang}</span>
 					</a>
 				</li>

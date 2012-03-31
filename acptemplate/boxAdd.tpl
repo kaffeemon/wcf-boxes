@@ -1,17 +1,7 @@
 {include file='header'}
 
-<script type="text/javascript">
-	//<![CDATA[
-	$(function() {
-		WCF.Icon.addObject({
-			'wcf.icon.delete': '{icon}delete1{/icon}'
-		});
-	});
-	//]]>
-</script>
-
 <header class="box48 boxHeadline">
-	<img src="{icon}{$action}1{/icon}" alt="" class="icon48" />
+	<img src="{@$__wcf->getPath()}icon/{$action}1.svg" alt="" class="icon48" />
 	<hgroup>
 		<h1>{lang}wcf.acp.box.{$action}{/lang}</h1>
 	</hgroup>
@@ -30,7 +20,7 @@
 		<ul>
 			<li>
 				<a href="{link controller='BoxList'}{/link}" title="{lang}wcf.acp.menu.link.box.list{/lang}" class="button">
-					<img src="{icon}box1{/icon}" alt="" class="icon24" />
+					<img src="{@$__wcf->getPath()}icon/box1.svg" alt="" class="icon24" />
 					<span>{lang}wcf.acp.menu.link.box.list{/lang}</span>
 				</a>
 			</li>
