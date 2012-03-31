@@ -6,7 +6,6 @@
 		<isunique>1</isunique>
 		<version>1.0.0 Alpha 5</version>
 		<date>2012-03-31</date>
-		<plugin>com.woltlab.wcf</plugin>
 	</packageinformation>
 	
 	<authorinformation>
